@@ -13,7 +13,7 @@ import br.com.kanleitos.util.StatusPedido;
 public interface PedidoInternacaoRepository extends JpaRepository<PedidoInternacao, Long> {
 	PedidoInternacao findByPaciente(Paciente paciente);
 
-	List<PedidoInternacao> findByStatusPedidoOrStatusPedido(StatusPedido pendente, StatusPedido atrasado);
+	List<PedidoInternacao> findAllByStatusPedidoOrStatusPedido(StatusPedido pendente, StatusPedido atrasado);
 
-	List<PedidoInternacao> findByPacienteAndStatusPedido(Paciente paciente, StatusPedido pendente);
+	List<PedidoInternacao> findAllByPacienteAndStatusPedido(Paciente paciente, StatusPedido pendente);
 }

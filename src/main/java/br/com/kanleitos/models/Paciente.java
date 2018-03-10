@@ -1,8 +1,12 @@
 package br.com.kanleitos.models;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class Paciente {
@@ -18,8 +22,8 @@ public class Paciente {
 	private String genero;
 	@Column(name = "nomeMae", nullable = false)
 	private String nomeMae;
-	@Column(name = "dataNascimento", nullable = false)
-	private String dataNascimento;
+	@Temporal(TemporalType.DATE)
+	private Date dataNascimento;
 
 	public Paciente() {
 		setDataNascimento(null);
@@ -70,11 +74,11 @@ public class Paciente {
 		this.nomeMae = nomeMae;
 	}
 
-	public String getDataNascimento() {
-		return this.dataNascimento;
+	public Date getDataNascimento() {
+		return dataNascimento;
 	}
 
-	public void setDataNascimento(String dataNascimento) {
+	public void setDataNascimento(Date dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
 

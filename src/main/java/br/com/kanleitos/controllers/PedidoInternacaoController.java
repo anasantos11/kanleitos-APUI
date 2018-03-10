@@ -6,15 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import br.com.kanleitos.models.Paciente;
 import br.com.kanleitos.models.PedidoInternacao;
-import br.com.kanleitos.repository.AlaRepository;
-import br.com.kanleitos.repository.DiagnosticoRepository;
 import br.com.kanleitos.repository.PacienteRepository;
 import br.com.kanleitos.repository.PedidoInternacaoRepository;
 import br.com.kanleitos.util.Response;
@@ -29,27 +27,16 @@ public class PedidoInternacaoController {
 	@Autowired
 	private PacienteRepository pacienteRepository;
 
-	@Autowired
-	private AlaRepository repositoryAla;
-
-	@Autowired
-	private DiagnosticoRepository repositoryDiagnostico;
-
 	@PostMapping("pedidoInternacao")
-	public @ResponseBody ResponseEntity<Response<Long>> pedidoInternacao(@RequestBody PedidoInternacao pedidoInternacao,
-			Long numProntuario, Long idAla, Long idDiagnostico) {
+	public @ResponseBody ResponseEntity<Response<Long>> pedidoInternacao(
+			@RequestBody PedidoInternacao pedidoInternacao) {
 
 		Response<Long> response = new Response<Long>();
 
-		// Get Paciente Ala e Diagnotisco
-		pedidoInternacao.setPaciente(pacienteRepository.findByNumProntuario(numProntuario));
-		pedidoInternacao.setAla(repositoryAla.findOne(idAla));
-		pedidoInternacao.setDiagnostico(repositoryDiagnostico.findOne((idDiagnostico)));
-
-		List<PedidoInternacao> pedidos = repository.findByPacienteAndStatusPedido(pedidoInternacao.getPaciente(),
+		List<PedidoInternacao> pedidos = repository.findAllByPacienteAndStatusPedido(pedidoInternacao.getPaciente(),
 				StatusPedido.PENDENTE);
 
-		if (pedidos.size() == 0) {
+		if (pedidos.isEmpty()) {
 			repository.save(pedidoInternacao);
 			response.setData(pedidoInternacao.getIdPedidoInternacao());
 			return ResponseEntity.ok(response);
@@ -59,9 +46,8 @@ public class PedidoInternacaoController {
 		}
 	}
 
-	@GetMapping("pedidoInternacao")
-	public @ResponseBody ResponseEntity<Response<PedidoInternacao>> getPaciente(@RequestParam Long numProntuario,
-			Long idPedidoInternacao) {
+	@GetMapping("pedidoInternacao/{numProntuario}")
+	public @ResponseBody ResponseEntity<Response<PedidoInternacao>> getPaciente(@PathVariable Long numProntuario) {
 
 		Response<PedidoInternacao> response = new Response<PedidoInternacao>();
 		PedidoInternacao pedido = null;
@@ -92,7 +78,7 @@ public class PedidoInternacaoController {
 
 	@GetMapping("pedidosEmAberto")
 	public @ResponseBody ResponseEntity<Response<List<PedidoInternacao>>> pedidosEmAndamento() {
-		List<PedidoInternacao> pedidos = repository.findByStatusPedidoOrStatusPedido(StatusPedido.PENDENTE,
+		List<PedidoInternacao> pedidos = repository.findAllByStatusPedidoOrStatusPedido(StatusPedido.PENDENTE,
 				StatusPedido.ATRASADO);
 
 		Response<List<PedidoInternacao>> response = new Response<>();

@@ -1,6 +1,6 @@
 package br.com.kanleitos.models;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -12,6 +12,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 
 import br.com.kanleitos.util.StatusPedido;
 import br.com.kanleitos.util.StatusPedidoConverter;
@@ -42,28 +45,28 @@ public class PedidoInternacao {
 	@Column(name = "residenteResponsavel")
 	private String residenteResponsavel;
 
-	@Column(name = "dataAdmissao", nullable = false)
-	private String dataAdmissao;
+	@Temporal(TemporalType.DATE)
+	private Date dataAdmissao;
 
-	@Column(name = "AIH", nullable = false)
-	private String AIH;
+	@NotNull
+	private String aih;
 
-	@Column(name = "dataPedido", nullable = false)
-	private String dataPedido;
+	@Temporal(TemporalType.DATE)
+	private Date dataPedido;
 
 	@Column(name = "statusPedido", nullable = false)
 	@Convert(converter = StatusPedidoConverter.class)
 	private StatusPedido statusPedido;
 
 	public PedidoInternacao() {
-		setAIH(null);
+		setAih(null);
 		setAla(new Ala());
 		setDataAdmissao(null);
 		setDiagnostico(new Diagnostico());
 		setMedicoResponsavel(null);
 		setPaciente(new Paciente());
 		setResidenteResponsavel(null);
-		setDataPedido(LocalDate.now().toString());
+		setDataPedido(new Date());
 		setStatusPedido(StatusPedido.PENDENTE);
 
 	}
@@ -96,20 +99,20 @@ public class PedidoInternacao {
 		this.residenteResponsavel = residenteResponsavel;
 	}
 
-	public String getDataAdmissao() {
+	public Date getDataAdmissao() {
 		return dataAdmissao;
 	}
 
-	public void setDataAdmissao(String dataAdmissao) {
+	public void setDataAdmissao(Date dataAdmissao) {
 		this.dataAdmissao = dataAdmissao;
 	}
 
-	public String getAIH() {
-		return AIH;
+	public String getAih() {
+		return aih;
 	}
 
-	public void setAIH(String aIH) {
-		AIH = aIH;
+	public void setAih(String aih) {
+		this.aih = aih;
 	}
 
 	public long getIdPedidoInternacao() {
@@ -128,11 +131,11 @@ public class PedidoInternacao {
 		return diagnostico;
 	}
 
-	public String getDataPedido() {
+	public Date getDataPedido() {
 		return dataPedido;
 	}
 
-	public void setDataPedido(String dataPedido) {
+	public void setDataPedido(Date dataPedido) {
 		this.dataPedido = dataPedido;
 	}
 
@@ -142,6 +145,14 @@ public class PedidoInternacao {
 
 	public void setStatusPedido(StatusPedido statusPedido) {
 		this.statusPedido = statusPedido;
+	}
+
+	@Override
+	public String toString() {
+		return "PedidoInternacao [idPedidoInternacao=" + idPedidoInternacao + ", paciente=" + paciente + ", ala=" + ala
+				+ ", diagnostico=" + diagnostico + ", medicoResponsavel=" + medicoResponsavel
+				+ ", residenteResponsavel=" + residenteResponsavel + ", dataAdmissao=" + dataAdmissao + ", aih=" + aih
+				+ ", dataPedido=" + dataPedido + ", statusPedido=" + statusPedido + "]";
 	}
 
 }

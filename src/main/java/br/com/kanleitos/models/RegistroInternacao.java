@@ -1,5 +1,6 @@
 package br.com.kanleitos.models;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -13,6 +14,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import br.com.kanleitos.util.Classificacao;
 import br.com.kanleitos.util.ClassificacaoConverter;
@@ -51,8 +54,8 @@ public class RegistroInternacao {
 	@Column(name = "previsaoAlta", nullable = false)
 	private String previsaoAlta;
 
-	@Column(name = "dataAlta")
-	private String dataAlta;
+	@Temporal(TemporalType.DATE)
+	private Date dataAlta;
 
 	@Column(name = "diasInternacao", nullable = false)
 	private int diasInternacao;
@@ -126,11 +129,11 @@ public class RegistroInternacao {
 		this.previsaoAlta = previsaoAlta;
 	}
 
-	public String getDataAlta() {
+	public Date getDataAlta() {
 		return dataAlta;
 	}
 
-	public void setDataAlta(String dataAlta) {
+	public void setDataAlta(Date dataAlta) {
 		this.dataAlta = dataAlta;
 	}
 
