@@ -1,7 +1,7 @@
 package br.com.kanleitos.util;
 
 public enum StatusRegistro {
-	EM_ANDAMENTO("Em Andamento"), ALTA("Alta"), OBITO("Óbito"), TRANSFERENCIA ("");
+	EM_ANDAMENTO("Em Andamento"), ALTA("Alta"), OBITO("Óbito"), TRANSFERENCIA("Transferência");
 
 	private String nome;
 

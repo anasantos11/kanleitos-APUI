@@ -45,14 +45,11 @@ public class PedidoInternacao {
 	@Column(name = "residenteResponsavel")
 	private String residenteResponsavel;
 
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataAdmissao;
 
 	@NotNull
 	private String aih;
-
-	@Temporal(TemporalType.DATE)
-	private Date dataPedido;
 
 	@Column(name = "statusPedido", nullable = false)
 	@Convert(converter = StatusPedidoConverter.class)
@@ -66,7 +63,6 @@ public class PedidoInternacao {
 		setMedicoResponsavel(null);
 		setPaciente(new Paciente());
 		setResidenteResponsavel(null);
-		setDataPedido(new Date());
 		setStatusPedido(StatusPedido.PENDENTE);
 
 	}
@@ -131,14 +127,6 @@ public class PedidoInternacao {
 		return diagnostico;
 	}
 
-	public Date getDataPedido() {
-		return dataPedido;
-	}
-
-	public void setDataPedido(Date dataPedido) {
-		this.dataPedido = dataPedido;
-	}
-
 	public StatusPedido getStatusPedido() {
 		return statusPedido;
 	}
@@ -152,7 +140,7 @@ public class PedidoInternacao {
 		return "PedidoInternacao [idPedidoInternacao=" + idPedidoInternacao + ", paciente=" + paciente + ", ala=" + ala
 				+ ", diagnostico=" + diagnostico + ", medicoResponsavel=" + medicoResponsavel
 				+ ", residenteResponsavel=" + residenteResponsavel + ", dataAdmissao=" + dataAdmissao + ", aih=" + aih
-				+ ", dataPedido=" + dataPedido + ", statusPedido=" + statusPedido + "]";
+				+ ", statusPedido=" + statusPedido + "]";
 	}
 
 }

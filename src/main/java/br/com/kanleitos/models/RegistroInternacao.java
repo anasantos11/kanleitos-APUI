@@ -17,8 +17,6 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import br.com.kanleitos.util.Classificacao;
-import br.com.kanleitos.util.ClassificacaoConverter;
 import br.com.kanleitos.util.StatusRegistro;
 import br.com.kanleitos.util.StatusRegistroConverter;
 
@@ -54,15 +52,8 @@ public class RegistroInternacao {
 	@Column(name = "previsaoAlta", nullable = false)
 	private String previsaoAlta;
 
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataAlta;
-
-	@Column(name = "diasInternacao", nullable = false)
-	private int diasInternacao;
-
-	@Column(name = "classificacao", nullable = false)
-	@Convert(converter = ClassificacaoConverter.class)
-	private Classificacao classificacao;
 
 	@Column(name = "statusRegistro", nullable = false)
 	@Convert(converter = StatusRegistroConverter.class)
@@ -75,8 +66,6 @@ public class RegistroInternacao {
 		setDataInternacao(null);
 		setPrevisaoAlta(null);
 		setDataAlta(null);
-		setDiasInternacao(0);
-		setClassificacao(Classificacao.VERDE);
 		setStatusRegistro(StatusRegistro.EM_ANDAMENTO);
 
 	}
@@ -135,22 +124,6 @@ public class RegistroInternacao {
 
 	public void setDataAlta(Date dataAlta) {
 		this.dataAlta = dataAlta;
-	}
-
-	public int getDiasInternacao() {
-		return diasInternacao;
-	}
-
-	public void setDiasInternacao(int diasInternacao) {
-		this.diasInternacao = diasInternacao;
-	}
-
-	public Classificacao getClassificacao() {
-		return classificacao;
-	}
-
-	public void setClassificacao(Classificacao classificacao) {
-		this.classificacao = classificacao;
 	}
 
 	public long getIdRegistroInternacao() {

@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Diagnostico {
@@ -18,14 +19,14 @@ public class Diagnostico {
 	@Column(name = "descricaoDiagnostico", nullable = false)
 	private String descricaoDiagnostico;
 
-	@Column(name = "CID", nullable = false)
-	private String CID;
+	@NotNull
+	private String cid;
 
 	@Column(name = "tempoPermanencia", nullable = false)
 	private int tempoPermanencia;
 
 	public Diagnostico() {
-		setCID("0000");
+		setCid("0000");
 		setDescricaoDiagnostico(null);
 		setTempoPermanencia(-1);
 	}
@@ -38,12 +39,12 @@ public class Diagnostico {
 		this.descricaoDiagnostico = descricaoDiagnostico;
 	}
 
-	public String getCID() {
-		return CID;
+	public String getCid() {
+		return cid;
 	}
 
-	public void setCID(String cID) {
-		CID = cID;
+	public void setCid(String cID) {
+		this.cid = cID;
 	}
 
 	public int getTempoPermanencia() {

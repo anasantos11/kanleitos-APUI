@@ -11,11 +11,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import br.com.kanleitos.models.RegistroInternacao;
+import br.com.kanleitos.repository.EnfermariaRepository;
 import br.com.kanleitos.repository.LeitoRepository;
 import br.com.kanleitos.repository.PedidoInternacaoRepository;
 import br.com.kanleitos.repository.RegistroInternacaoRepository;
-import br.com.kanleitos.repository.EnfermariaRepository;
-import br.com.kanleitos.util.Classificacao;
 import br.com.kanleitos.util.Response;
 import br.com.kanleitos.util.StatusPedido;
 import br.com.kanleitos.util.StatusRegistro;
@@ -46,7 +45,6 @@ public class RegistroInternacaoController {
 		registroInternacao.setPedidoInternacao(pedidoRepository.findOne(idPedido));
 		registroInternacao.setEnfermaria(enfermariaRepository.findOne(idEnfermaria));
 		registroInternacao.setLeito(leitoRepository.findOne(idLeito));
-		registroInternacao.setClassificacao(Classificacao.VERDE);
 		registroInternacao.setStatusRegistro(StatusRegistro.EM_ANDAMENTO);
 
 		List<RegistroInternacao> registros = registroRepository.findByPedidoInternacaoAndStatusRegistro(
@@ -73,7 +71,8 @@ public class RegistroInternacaoController {
 
 	@GetMapping("/pacientesInternados")
 	public @ResponseBody ResponseEntity<Response<List<RegistroInternacao>>> listarInternacoes() {
-		List<RegistroInternacao> pacientesInternados = registroRepository.findAll();
+		List<RegistroInternacao> pacientesInternados = registroRepository
+				.findAllByStatusRegistro(StatusRegistro.EM_ANDAMENTO);
 
 		Response<List<RegistroInternacao>> response = new Response<>();
 		response.setData(pacientesInternados);

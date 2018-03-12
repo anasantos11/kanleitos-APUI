@@ -1,6 +1,5 @@
 package br.com.kanleitos.models;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -9,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class TipoPendencia {
@@ -18,7 +18,7 @@ public class TipoPendencia {
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "TIPO_PENDENCIA_ID")
 	private long idPendencia;
 
-	@Column(name = "descPendencia", nullable = false)
+	@NotNull
 	private String descPendencia;
 
 	@ManyToOne(fetch = FetchType.EAGER)
