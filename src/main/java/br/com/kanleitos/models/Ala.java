@@ -46,4 +46,9 @@ public class Ala {
 		this.inativa = inativa;
 	}
 
+	@Override
+	public String toString() {
+		return "Ala [idAla=" + idAla + ", nomeAla=" + nomeAla + ", inativa=" + inativa + "]";
+	}
+
 }

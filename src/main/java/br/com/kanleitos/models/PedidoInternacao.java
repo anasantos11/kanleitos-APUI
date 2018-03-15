@@ -9,7 +9,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
@@ -28,15 +27,12 @@ public class PedidoInternacao {
 	private long idPedidoInternacao;
 
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "numProntuario", nullable = false)
 	private Paciente paciente;
 
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "idAla", nullable = false)
+	@OneToOne
 	private Ala ala;
 
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "idDiagnostico")
+	@OneToOne
 	private Diagnostico diagnostico;
 
 	@Column(name = "medicoResponsavel")
