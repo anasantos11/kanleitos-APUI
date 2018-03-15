@@ -1,17 +1,17 @@
 package br.com.kanleitos.models;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Convert;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
+import javax.validation.constraints.NotNull;
 
-import br.com.kanleitos.util.StatusLeitoConverter;
 import br.com.kanleitos.util.TipoStatusLeito;
 
 @Entity
@@ -31,17 +31,17 @@ public class Leito {
 	@JoinColumn(name = "idEnfermaria", nullable = false)
 	private Enfermaria enfermaria;
 
-	@Column(name = "nomeLeito", nullable = false)
+	@NotNull
 	private String nomeLeito;
 
-	@Column(name = "generoLeito", nullable = false)
+	@NotNull
 	private String generoLeito;
 
-	@Column(name = "tipoLeito", nullable = false)
+	@NotNull
 	private String tipoLeito;
 
-	@Column(name = "statusLeito", nullable = false)
-	@Convert(converter = StatusLeitoConverter.class)
+	@NotNull
+	@Enumerated(EnumType.STRING)
 	private TipoStatusLeito statusLeito;
 
 	public Leito() {

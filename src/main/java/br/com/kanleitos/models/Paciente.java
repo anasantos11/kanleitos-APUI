@@ -2,26 +2,30 @@ package br.com.kanleitos.models;
 
 import java.util.Date;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Paciente {
 	@Id
-	@Column(name = "numProntuario", nullable = false)
+	@NotNull
 	private long numProntuario;
 
-	@Column(name = "nomePaciente", nullable = false)
+	@NotNull
 	private String nomePaciente;
-	@Column(name = "idade", nullable = false)
+
+	@NotNull
 	private int idade;
-	@Column(name = "genero", nullable = false)
+
+	@NotNull
 	private String genero;
-	@Column(name = "nomeMae", nullable = false)
+
+	@NotNull
 	private String nomeMae;
+
 	@Temporal(TemporalType.DATE)
 	private Date dataNascimento;
 

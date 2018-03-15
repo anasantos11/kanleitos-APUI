@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
+import javax.validation.constraints.NotNull;
 
 @Entity
 
@@ -23,13 +24,13 @@ public class Enfermaria {
 	@JoinColumn(name = "idAla", nullable = false)
 	private Ala ala;
 
-	@Column(name = "nomeEnfermaria", nullable = false)
+	@NotNull
 	private String nomeEnfermaria;
 
 	@Column(name = "generoEnfermaria")
 	private String generoEnfermaria;
 
-	@Column(name = "inativa", nullable = false)
+	@NotNull
 	private boolean inativa;
 
 	public Enfermaria() {
@@ -73,6 +74,12 @@ public class Enfermaria {
 
 	public long getIdEnfermaria() {
 		return idEnfermaria;
+	}
+
+	@Override
+	public String toString() {
+		return "Enfermaria [idEnfermaria=" + idEnfermaria + ", ala=" + ala + ", nomeEnfermaria=" + nomeEnfermaria
+				+ ", generoEnfermaria=" + generoEnfermaria + ", inativa=" + inativa + "]";
 	}
 
 }

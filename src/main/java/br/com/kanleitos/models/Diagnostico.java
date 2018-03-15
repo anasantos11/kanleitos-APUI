@@ -1,6 +1,5 @@
 package br.com.kanleitos.models;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,13 +15,13 @@ public class Diagnostico {
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "DIAG_ID")
 	private long idDiagnostico;
 
-	@Column(name = "descricaoDiagnostico", nullable = false)
+	@NotNull
 	private String descricaoDiagnostico;
 
 	@NotNull
 	private String cid;
 
-	@Column(name = "tempoPermanencia", nullable = false)
+	@NotNull
 	private int tempoPermanencia;
 
 	public Diagnostico() {
@@ -57,6 +56,12 @@ public class Diagnostico {
 
 	public long getIdDiagnostico() {
 		return idDiagnostico;
+	}
+
+	@Override
+	public String toString() {
+		return "Diagnostico [idDiagnostico=" + idDiagnostico + ", descricaoDiagnostico=" + descricaoDiagnostico
+				+ ", cid=" + cid + ", tempoPermanencia=" + tempoPermanencia + "]";
 	}
 
 }

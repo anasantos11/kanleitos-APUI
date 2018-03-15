@@ -3,9 +3,9 @@ package br.com.kanleitos.models;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Convert;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,7 +16,6 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 import br.com.kanleitos.util.StatusPedido;
-import br.com.kanleitos.util.StatusPedidoConverter;
 
 @Entity
 public class PedidoInternacao {
@@ -35,10 +34,8 @@ public class PedidoInternacao {
 	@OneToOne
 	private Diagnostico diagnostico;
 
-	@Column(name = "medicoResponsavel")
 	private String medicoResponsavel;
 
-	@Column(name = "residenteResponsavel")
 	private String residenteResponsavel;
 
 	@Temporal(TemporalType.TIMESTAMP)
@@ -47,8 +44,8 @@ public class PedidoInternacao {
 	@NotNull
 	private String aih;
 
-	@Column(name = "statusPedido", nullable = false)
-	@Convert(converter = StatusPedidoConverter.class)
+	@NotNull
+	@Enumerated(EnumType.STRING)
 	private StatusPedido statusPedido;
 
 	public PedidoInternacao() {

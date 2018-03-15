@@ -44,4 +44,10 @@ public class ExameLista {
 		this.registroInternacao = registroInternacao;
 	}
 
+	@Override
+	public String toString() {
+		return "ExameLista [idExameLista=" + idExameLista + ", registroInternacao=" + registroInternacao
+				+ ", tiposExames=" + tiposExames + "]";
+	}
+
 }

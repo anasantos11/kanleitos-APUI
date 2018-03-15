@@ -1,6 +1,5 @@
 package br.com.kanleitos.models;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -9,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class TipoExame {
@@ -22,10 +22,10 @@ public class TipoExame {
 	@JoinColumn(name = "exameLista", referencedColumnName = "idExameLista")
 	private ExameLista exameLista;
 
-	@Column(name = "descExame", nullable = false)
+	@NotNull
 	private String descExame;
 
-	@Column(name = "inativo", nullable = false)
+	@NotNull
 	private boolean inativo;
 
 	public TipoExame() {
@@ -51,6 +51,12 @@ public class TipoExame {
 
 	public long getIdExame() {
 		return idExame;
+	}
+
+	@Override
+	public String toString() {
+		return "TipoExame [idExame=" + idExame + ", exameLista=" + exameLista + ", descExame=" + descExame
+				+ ", inativo=" + inativo + "]";
 	}
 
 }

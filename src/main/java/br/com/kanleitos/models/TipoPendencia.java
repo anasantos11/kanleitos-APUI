@@ -41,4 +41,10 @@ public class TipoPendencia {
 		return idPendencia;
 	}
 
+	@Override
+	public String toString() {
+		return "TipoPendencia [idPendencia=" + idPendencia + ", descPendencia=" + descPendencia
+				+ ", registroInternacao=" + registroInternacao + "]";
+	}
+
 }

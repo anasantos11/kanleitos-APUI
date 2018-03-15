@@ -1,11 +1,11 @@
 package br.com.kanleitos.models;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Ala {
@@ -15,10 +15,10 @@ public class Ala {
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "ALA_ID")
 	private long idAla;
 
-	@Column(name = "nomeAla", nullable = false)
+	@NotNull
 	private String nomeAla;
 
-	@Column(name = "inativa", nullable = false)
+	@NotNull
 	private boolean inativa;
 
 	public Ala() {

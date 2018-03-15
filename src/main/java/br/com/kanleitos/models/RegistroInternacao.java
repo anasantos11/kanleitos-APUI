@@ -4,9 +4,9 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Convert;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,9 +16,9 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 
 import br.com.kanleitos.util.StatusRegistro;
-import br.com.kanleitos.util.StatusRegistroConverter;
 
 @Entity
 public class RegistroInternacao {
@@ -46,17 +46,17 @@ public class RegistroInternacao {
 	@JoinColumn(name = "idLeito", nullable = false)
 	private Leito leito;
 
-	@Column(name = "dataInternacao", nullable = false)
+	@NotNull
 	private String dataInternacao;
 
-	@Column(name = "previsaoAlta", nullable = false)
+	@NotNull
 	private String previsaoAlta;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataAlta;
 
-	@Column(name = "statusRegistro", nullable = false)
-	@Convert(converter = StatusRegistroConverter.class)
+	@NotNull
+	@Enumerated(EnumType.STRING)
 	private StatusRegistro statusRegistro;
 
 	public RegistroInternacao() {
@@ -136,6 +136,14 @@ public class RegistroInternacao {
 
 	public void setStatusRegistro(StatusRegistro statusRegistro) {
 		this.statusRegistro = statusRegistro;
+	}
+
+	@Override
+	public String toString() {
+		return "RegistroInternacao [idRegistroInternacao=" + idRegistroInternacao + ", pedidoInternacao="
+				+ pedidoInternacao + ", exames=" + exames + ", pendencias=" + pendencias + ", enfermaria=" + enfermaria
+				+ ", leito=" + leito + ", dataInternacao=" + dataInternacao + ", previsaoAlta=" + previsaoAlta
+				+ ", dataAlta=" + dataAlta + ", statusRegistro=" + statusRegistro + "]";
 	}
 
 }
