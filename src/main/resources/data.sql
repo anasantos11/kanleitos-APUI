@@ -155,117 +155,117 @@ insert into enfermaria (nome_enfermaria, genero_enfermaria,inativa,id_ala) value
 insert into enfermaria (nome_enfermaria, genero_enfermaria,inativa,id_ala) values('enf-11', 'indefinido', 0,9);
 
 
-insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-01','indefinido','desocupado','comum', 1,1);
+insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-01','indefinido','DESOCUPADO','comum', 1,1);
 
-insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-02','indefinido','desocupado','comum', 1,1);
+insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-02','indefinido','DESOCUPADO','comum', 1,1);
 
-insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-03','indefinido','desocupado','comum', 1,1);
+insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-03','indefinido','DESOCUPADO','comum', 1,1);
 
-insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-04','indefinido','desocupado','comum', 1,1);
+insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-04','indefinido','DESOCUPADO','comum', 1,1);
 
-insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-05','indefinido','desocupado','comum', 1,1);
+insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-05','indefinido','DESOCUPADO','comum', 1,1);
 
-insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-01','indefinido','desocupado','comum', 1,2);
+insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-01','indefinido','DESOCUPADO','comum', 1,2);
 
-insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-02','indefinido','desocupado','comum', 1,2);
+insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-02','indefinido','DESOCUPADO','comum', 1,2);
 
-insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-03','indefinido','desocupado','comum', 1,2);
+insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-03','indefinido','DESOCUPADO','comum', 1,2);
 
-insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-04','indefinido','desocupado','comum', 1,2);
+insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-04','indefinido','DESOCUPADO','comum', 1,2);
 
-insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-05','indefinido','desocupado','comum', 1,2);
+insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-05','indefinido','DESOCUPADO','comum', 1,2);
 
-insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-01','indefinido','desocupado','comum', 1,3);
+insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-01','indefinido','DESOCUPADO','comum', 1,3);
 
-insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-02','indefinido','desocupado','comum', 1,3);
+insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-02','indefinido','DESOCUPADO','comum', 1,3);
 
-insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-03','indefinido','desocupado','comum', 1,3);
+insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-03','indefinido','DESOCUPADO','comum', 1,3);
 
-insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-04','indefinido','desocupado','comum', 1,3);
+insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-04','indefinido','DESOCUPADO','comum', 1,3);
 
-insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-05','indefinido','desocupado','comum', 1,3);
+insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-05','indefinido','DESOCUPADO','comum', 1,3);
 
-insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-06','indefinido','desocupado','comum', 1,3);
+insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-06','indefinido','DESOCUPADO','comum', 1,3);
 
-insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-07','indefinido','desocupado','comum', 1,3);
+insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-07','indefinido','DESOCUPADO','comum', 1,3);
 
-insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-08','indefinido','desocupado','comum', 1,3);
+insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-08','indefinido','DESOCUPADO','comum', 1,3);
 
-insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-09','indefinido','desocupado','comum', 1,3);
+insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-09','indefinido','DESOCUPADO','comum', 1,3);
 
-insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-10','indefinido','desocupado','comum', 1,3);
+insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-10','indefinido','DESOCUPADO','comum', 1,3);
 
-insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-03','indefinido','desocupado','comum', 1,4);
+insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-03','indefinido','DESOCUPADO','comum', 1,4);
 
-insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-05','indefinido','desocupado','comum', 1,4);
+insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-05','indefinido','DESOCUPADO','comum', 1,4);
 
-insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-06','indefinido','desocupado','comum', 1,4);
+insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-06','indefinido','DESOCUPADO','comum', 1,4);
 
-insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-01','indefinido','desocupado','comum', 9,56);
+insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-01','indefinido','DESOCUPADO','comum', 9,56);
 
-insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-01','indefinido','desocupado','comum', 9,57);
+insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-01','indefinido','DESOCUPADO','comum', 9,57);
 
-insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-02','indefinido','desocupado','comum', 9,57);
+insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-02','indefinido','DESOCUPADO','comum', 9,57);
 
-insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-03','indefinido','desocupado','comum', 9,57);
+insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-03','indefinido','DESOCUPADO','comum', 9,57);
 
-insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-01','indefinido','desocupado','comum', 9,58);
+insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-01','indefinido','DESOCUPADO','comum', 9,58);
 
-insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-02','indefinido','desocupado','comum', 9,58);
+insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-02','indefinido','DESOCUPADO','comum', 9,58);
 
-insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-03','indefinido','desocupado','comum', 9,58);
+insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-03','indefinido','DESOCUPADO','comum', 9,58);
 
-insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-01','indefinido','desocupado','comum', 9,59);
+insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-01','indefinido','DESOCUPADO','comum', 9,59);
 
-insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-02','indefinido','desocupado','comum', 9,59);
+insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-02','indefinido','DESOCUPADO','comum', 9,59);
 
-insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-03','indefinido','desocupado','comum', 9,59);
+insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-03','indefinido','DESOCUPADO','comum', 9,59);
 
-insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-01','indefinido','desocupado','comum', 9,60);
+insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-01','indefinido','DESOCUPADO','comum', 9,60);
 
-insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-02','indefinido','desocupado','comum', 9,60);
+insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-02','indefinido','DESOCUPADO','comum', 9,60);
 
-insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-03','indefinido','desocupado','comum', 9,60);
-
-
-insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-01','indefinido','desocupado','comum', 9,61);
-
-insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-02','indefinido','desocupado','comum', 9,61);
-
-insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-03','indefinido','desocupado','comum', 9,61);
-
-insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-01','indefinido','desocupado','comum', 9,62);
-
-insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-02','indefinido','desocupado','comum', 9,62);
-
-insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-03','indefinido','desocupado','comum', 9,62);
-
-insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-01','indefinido','desocupado','comum', 9,63);
-
-insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-02','indefinido','desocupado','comum', 9,63);
-
-insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-03','indefinido','desocupado','comum', 9,63);
-
-insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-01','indefinido','desocupado','comum', 9,64);
-
-insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-02','indefinido','desocupado','comum', 9,64);
-
-insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-03','indefinido','desocupado','comum', 9,64);
+insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-03','indefinido','DESOCUPADO','comum', 9,60);
 
 
-insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-01','indefinido','desocupado','comum', 9,65);
+insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-01','indefinido','DESOCUPADO','comum', 9,61);
 
-insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-01','indefinido','desocupado','comum', 9,66);
+insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-02','indefinido','DESOCUPADO','comum', 9,61);
 
-insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-02','indefinido','desocupado','comum', 9,66);
+insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-03','indefinido','DESOCUPADO','comum', 9,61);
 
-insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-03','indefinido','desocupado','comum', 9,66);
+insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-01','indefinido','DESOCUPADO','comum', 9,62);
 
-insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-04','indefinido','desocupado','comum', 9,66);
+insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-02','indefinido','DESOCUPADO','comum', 9,62);
 
-insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-05','indefinido','desocupado','comum', 9,66);
+insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-03','indefinido','DESOCUPADO','comum', 9,62);
 
-insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-06','indefinido','desocupado','comum', 9,66);
+insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-01','indefinido','DESOCUPADO','comum', 9,63);
+
+insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-02','indefinido','DESOCUPADO','comum', 9,63);
+
+insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-03','indefinido','DESOCUPADO','comum', 9,63);
+
+insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-01','indefinido','DESOCUPADO','comum', 9,64);
+
+insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-02','indefinido','DESOCUPADO','comum', 9,64);
+
+insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-03','indefinido','DESOCUPADO','comum', 9,64);
+
+
+insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-01','indefinido','DESOCUPADO','comum', 9,65);
+
+insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-01','indefinido','DESOCUPADO','comum', 9,66);
+
+insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-02','indefinido','DESOCUPADO','comum', 9,66);
+
+insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-03','indefinido','DESOCUPADO','comum', 9,66);
+
+insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-04','indefinido','DESOCUPADO','comum', 9,66);
+
+insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-05','indefinido','DESOCUPADO','comum', 9,66);
+
+insert into leito(nome_leito, genero_leito, status_leito, tipo_leito, id_ala, id_enfermaria) values('l-06','indefinido','DESOCUPADO','comum', 9,66);
 
 insert into diagnostico (cid, descricao_diagnostico, tempo_permanencia) values('a16','tuberculose das vias respiratórias, sem confirmaçãoo bacteriológica ou histológica',20);
 
