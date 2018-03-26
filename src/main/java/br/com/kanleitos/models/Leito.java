@@ -1,6 +1,5 @@
 package br.com.kanleitos.models;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -8,7 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.NotNull;
 
@@ -23,11 +22,7 @@ public class Leito {
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "LEITO_ID")
 	private long idLeito;
 
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "idAla", nullable = false)
-	private Ala ala;
-
-	@OneToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "idEnfermaria", nullable = false)
 	private Enfermaria enfermaria;
 
@@ -43,23 +38,15 @@ public class Leito {
 	@NotNull
 	@Enumerated(EnumType.STRING)
 	private TipoStatusLeito statusLeito;
-
+	
 	public Leito() {
 		setNomeLeito(null);
 		setGeneroLeito(null);
 		setTipoLeito(null);
 		setStatusLeito(TipoStatusLeito.DESOCUPADO);
-		setAla(new Ala());
 		setEnfermaria(new Enfermaria());
 	}
 
-	public Ala getAla() {
-		return ala;
-	}
-
-	public void setAla(Ala ala) {
-		this.ala = ala;
-	}
 
 	public Enfermaria getEnfermaria() {
 		return enfermaria;
@@ -104,5 +91,6 @@ public class Leito {
 	public long getIdLeito() {
 		return idLeito;
 	}
+	
 
 }

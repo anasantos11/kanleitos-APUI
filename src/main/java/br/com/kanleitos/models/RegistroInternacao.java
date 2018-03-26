@@ -1,9 +1,7 @@
 package br.com.kanleitos.models;
 
 import java.util.Date;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -11,7 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
@@ -28,21 +26,15 @@ public class RegistroInternacao {
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "REGISTRO_ID")
 	private long idRegistroInternacao;
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne
 	@JoinColumn(name = "idPedidoInternacao", nullable = false)
 	private PedidoInternacao pedidoInternacao;
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "registroInternacao")
-	private List<ExameLista> exames;
-
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "registroInternacao")
-	private List<TipoPendencia> pendencias;
-
-	@OneToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "idEnfermaria", nullable = false)
 	private Enfermaria enfermaria;
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "idLeito", nullable = false)
 	private Leito leito;
 
@@ -76,14 +68,6 @@ public class RegistroInternacao {
 
 	public void setPedidoInternacao(PedidoInternacao pedidoInternacao) {
 		this.pedidoInternacao = pedidoInternacao;
-	}
-
-	public List<TipoPendencia> getTipoPendencia() {
-		return pendencias;
-	}
-
-	public void setTipoPendencia(TipoPendencia pendencia) {
-		pendencias.add(pendencia);
 	}
 
 	public Enfermaria getEnfermaria() {
@@ -140,10 +124,10 @@ public class RegistroInternacao {
 
 	@Override
 	public String toString() {
-		return "RegistroInternacao [idRegistroInternacao=" + idRegistroInternacao + ", pedidoInternacao="
-				+ pedidoInternacao + ", exames=" + exames + ", pendencias=" + pendencias + ", enfermaria=" + enfermaria
-				+ ", leito=" + leito + ", dataInternacao=" + dataInternacao + ", previsaoAlta=" + previsaoAlta
-				+ ", dataAlta=" + dataAlta + ", statusRegistro=" + statusRegistro + "]";
+		return "RegistroInternacao [idRegistroInternacao=" + idRegistroInternacao + ", pedidoInternacao=" + pedidoInternacao
+				+ ", enfermaria=" + enfermaria + ", leito=" + leito + ", dataInternacao=" + dataInternacao
+				+ ", previsaoAlta=" + previsaoAlta + ", dataAlta=" + dataAlta + ", statusRegistro=" + statusRegistro
+				+ "]";
 	}
 
 }

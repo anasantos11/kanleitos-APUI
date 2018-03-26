@@ -2,14 +2,14 @@ package br.com.kanleitos.models;
 
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -25,13 +25,16 @@ public class PedidoInternacao {
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "PEDIDO_ID")
 	private long idPedidoInternacao;
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@ManyToOne
+	@JoinColumn(name = "idPaciente", nullable = false)
 	private Paciente paciente;
 
-	@OneToOne
+	@ManyToOne
+	@JoinColumn(name = "idAla", nullable = false)
 	private Ala ala;
 
-	@OneToOne
+	@ManyToOne
+	@JoinColumn(name = "idDiagnostico", nullable = false)
 	private Diagnostico diagnostico;
 
 	private String medicoResponsavel;
@@ -39,6 +42,7 @@ public class PedidoInternacao {
 	private String residenteResponsavel;
 
 	@Temporal(TemporalType.TIMESTAMP)
+	@NotNull
 	private Date dataAdmissao;
 
 	@NotNull

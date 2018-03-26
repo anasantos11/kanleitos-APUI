@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import br.com.kanleitos.models.PedidoInternacao;
 import br.com.kanleitos.models.RegistroInternacao;
-import br.com.kanleitos.repository.EnfermariaRepository;
 import br.com.kanleitos.repository.LeitoRepository;
 import br.com.kanleitos.repository.PedidoInternacaoRepository;
 import br.com.kanleitos.repository.RegistroInternacaoRepository;
@@ -32,25 +32,17 @@ public class RegistroInternacaoController {
 	@Autowired
 	private LeitoRepository leitoRepository;
 
-	@Autowired
-	private EnfermariaRepository enfermariaRepository;
-
 	@PostMapping("/registroInternacao")
 	public @ResponseBody ResponseEntity<Response<Long>> registroInternacao(
-			@RequestBody RegistroInternacao registroInternacao, Long idPedido, Long idEnfermaria, Long idLeito) {
+			@RequestBody RegistroInternacao registroInternacao) {
 
 		Response<Long> response = new Response<Long>();
 
-		// Get PedidoInternacao Enfermaria e Leito
-		registroInternacao.setPedidoInternacao(pedidoRepository.findOne(idPedido));
-		registroInternacao.setEnfermaria(enfermariaRepository.findOne(idEnfermaria));
-		registroInternacao.setLeito(leitoRepository.findOne(idLeito));
-		registroInternacao.setStatusRegistro(StatusRegistro.EM_ANDAMENTO);
-
-		List<RegistroInternacao> registros = registroRepository.findByPedidoInternacaoAndStatusRegistro(
-				registroInternacao.getPedidoInternacao(), StatusRegistro.EM_ANDAMENTO);
+		List<PedidoInternacao> registros = registroRepository.findAllByPedidoInternacaoAndStatusRegistro(registroInternacao.getPedidoInternacao(),
+				StatusRegistro.EM_ANDAMENTO);
 
 		if (registros.size() == 0) {
+			registroInternacao.setStatusRegistro(StatusRegistro.EM_ANDAMENTO);
 			registroRepository.save(registroInternacao);
 			// Alterar Status do Leito para Ocupado
 			registroInternacao.getLeito().setStatusLeito(TipoStatusLeito.OCUPADO_COMUM);
@@ -63,7 +55,7 @@ public class RegistroInternacaoController {
 			response.setData(registroInternacao.getIdRegistroInternacao());
 			return ResponseEntity.ok(response);
 		} else {
-			response.addError("Usuário já cadastrado");
+			response.addError("Paciente já internado");
 			return ResponseEntity.badRequest().body(response);
 		}
 

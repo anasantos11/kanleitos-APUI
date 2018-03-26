@@ -18,16 +18,11 @@ public class Diagnostico {
 	@NotNull
 	private String descricaoDiagnostico;
 
-	@NotNull
 	private String cid;
 
-	@NotNull
-	private int tempoPermanencia;
-
 	public Diagnostico() {
-		setCid("0000");
+		setCid(null);
 		setDescricaoDiagnostico(null);
-		setTempoPermanencia(-1);
 	}
 
 	public String getDescricaoDiagnostico() {
@@ -46,14 +41,6 @@ public class Diagnostico {
 		this.cid = cID;
 	}
 
-	public int getTempoPermanencia() {
-		return tempoPermanencia;
-	}
-
-	public void setTempoPermanencia(int tempoPermanencia) {
-		this.tempoPermanencia = tempoPermanencia;
-	}
-
 	public long getIdDiagnostico() {
 		return idDiagnostico;
 	}
@@ -61,7 +48,7 @@ public class Diagnostico {
 	@Override
 	public String toString() {
 		return "Diagnostico [idDiagnostico=" + idDiagnostico + ", descricaoDiagnostico=" + descricaoDiagnostico
-				+ ", cid=" + cid + ", tempoPermanencia=" + tempoPermanencia + "]";
+				+ ", cid=" + cid + "]";
 	}
 
 }

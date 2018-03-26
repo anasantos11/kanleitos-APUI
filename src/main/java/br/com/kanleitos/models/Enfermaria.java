@@ -1,13 +1,11 @@
 package br.com.kanleitos.models;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.NotNull;
 
@@ -20,14 +18,14 @@ public class Enfermaria {
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "ENF_ID")
 	private long idEnfermaria;
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "idAla", nullable = false)
 	private Ala ala;
 
 	@NotNull
 	private String nomeEnfermaria;
 
-	@Column(name = "generoEnfermaria")
+	@NotNull
 	private String generoEnfermaria;
 
 	@NotNull
@@ -75,7 +73,7 @@ public class Enfermaria {
 	public long getIdEnfermaria() {
 		return idEnfermaria;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "Enfermaria [idEnfermaria=" + idEnfermaria + ", ala=" + ala + ", nomeEnfermaria=" + nomeEnfermaria
