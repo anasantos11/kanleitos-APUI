@@ -52,6 +52,9 @@ public class PedidoInternacao {
 	@Enumerated(EnumType.STRING)
 	private StatusPedido statusPedido;
 
+	@ManyToOne
+	private Isolamento isolamento;
+
 	public PedidoInternacao() {
 		setAih(null);
 		setAla(new Ala());
@@ -132,12 +135,24 @@ public class PedidoInternacao {
 		this.statusPedido = statusPedido;
 	}
 
+	public Isolamento getIsolamento() {
+		return isolamento;
+	}
+
+	public void setIsolamento(Isolamento isolamento) {
+		this.isolamento = isolamento;
+	}
+
+	public void setIdPedidoInternacao(long idPedidoInternacao) {
+		this.idPedidoInternacao = idPedidoInternacao;
+	}
+
 	@Override
 	public String toString() {
 		return "PedidoInternacao [idPedidoInternacao=" + idPedidoInternacao + ", paciente=" + paciente + ", ala=" + ala
 				+ ", diagnostico=" + diagnostico + ", medicoResponsavel=" + medicoResponsavel
 				+ ", residenteResponsavel=" + residenteResponsavel + ", dataAdmissao=" + dataAdmissao + ", aih=" + aih
-				+ ", statusPedido=" + statusPedido + "]";
+				+ ", statusPedido=" + statusPedido + ", isolamento=" + isolamento + "]";
 	}
 
 }
