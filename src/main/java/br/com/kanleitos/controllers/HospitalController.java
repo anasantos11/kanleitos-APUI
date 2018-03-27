@@ -17,35 +17,35 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import br.com.kanleitos.models.Isolamento;
-import br.com.kanleitos.repository.IsolamentoRepository;
+import br.com.kanleitos.models.Hospital;
+import br.com.kanleitos.repository.HospitalRepository;
 import br.com.kanleitos.util.Response;
-import br.com.kanleitos.validators.IsolamentoValidator;
+import br.com.kanleitos.validators.HospitalValidator;
 
 @Controller
-public class IsolamentoController {
+public class HospitalController {
 
 	@Autowired
-	private IsolamentoRepository isolamentoRepository;
+	private HospitalRepository hospitalRepository;
 
-	@InitBinder("isolamento")
+	@InitBinder("hospital")
 	public void initBinder(WebDataBinder binder) {
-		binder.setValidator(new IsolamentoValidator());
+		binder.setValidator(new HospitalValidator());
 	}
 
-	@GetMapping("/isolamentos")
-	public @ResponseBody ResponseEntity<Response<List<Isolamento>>> getIsolamentos() {
-		List<Isolamento> isolamentos = isolamentoRepository.findAll();
-		Response<List<Isolamento>> response = new Response<>();
-		response.setData(isolamentos);
+	@GetMapping("/hospitais")
+	public @ResponseBody ResponseEntity<Response<List<Hospital>>> getHospitals() {
+		List<Hospital> hospitais = hospitalRepository.findAll();
+		Response<List<Hospital>> response = new Response<>();
+		response.setData(hospitais);
 		return ResponseEntity.ok(response);
 	}
 
-	@PostMapping("/isolamento")
-	public @ResponseBody ResponseEntity<Response<Long>> cadastrarIsolamento(@RequestBody @Valid Isolamento isolamento,
+	@PostMapping("/hospital")
+	public @ResponseBody ResponseEntity<Response<Integer>> cadastrarHospital(@RequestBody @Valid Hospital hospital,
 			BindingResult result) {
 
-		Response<Long> response = new Response<Long>();
+		Response<Integer> response = new Response<Integer>();
 
 		if (result.hasErrors()) {
 			response.setData(null);
@@ -53,55 +53,56 @@ public class IsolamentoController {
 
 			return ResponseEntity.badRequest().body(response);
 		} else {
-			isolamento = isolamentoRepository.save(isolamento);
-			response.setData(isolamento.getId_Isolamento());
+			hospital = hospitalRepository.save(hospital);
+			response.setData(hospital.getId_hospital());
 
 			return ResponseEntity.ok(response);
 		}
 
 	}
 
-	@PutMapping("/isolamento")
-	public @ResponseBody ResponseEntity<Response<Long>> updateIsolamento(@RequestParam Long idIsolamento,
-			@RequestBody @Valid Isolamento isolamento, BindingResult result) {
+	@PutMapping("/hospital")
+	public @ResponseBody ResponseEntity<Response<Integer>> updateHospital(@RequestParam Integer idHospital,
+			@RequestBody @Valid Hospital hospital, BindingResult result) {
 
-		Response<Long> response = new Response<Long>();
+		Response<Integer> response = new Response<Integer>();
 
 		if (result.hasErrors()) {
 			response.setData(null);
 			result.getAllErrors().forEach(error -> response.addError(error.getCode()));
 
 			return ResponseEntity.badRequest().body(response);
-		} else if (!isolamentoRepository.exists(idIsolamento)) {
+		} else if (!hospitalRepository.exists(idHospital)) {
 			response.setData(null);
 			response.addError("Não conseguimos encontrar este isolamento");
 
 			return ResponseEntity.badRequest().body(response);
 		} else {
 
-			isolamento.setId_Isolamento(idIsolamento);
-			isolamentoRepository.save(isolamento);
-			response.setData(idIsolamento);
+			hospital.setId_hospital(idHospital);
+			hospitalRepository.save(hospital);
+			response.setData(idHospital);
 
 			return ResponseEntity.ok(response);
 		}
 	}
 
-	@PostMapping("/inativarIsolamento")
-	public @ResponseBody ResponseEntity<Response<Long>> inativarIsolamento(@RequestBody Long idIsolamento) {
-		Response<Long> response = new Response<Long>();
-		if (!isolamentoRepository.exists(idIsolamento)) {
+	@PostMapping("/inativarHospital")
+	public @ResponseBody ResponseEntity<Response<Integer>> inativarHospital(@RequestBody Integer idHospital) {
+		Response<Integer> response = new Response<Integer>();
+		if (!hospitalRepository.exists(idHospital)) {
 			response.setData(null);
 			response.addError("Não conseguimos encontrar este isolamento");
 
 			return ResponseEntity.badRequest().body(response);
 		} else {
-			Isolamento isolamento = isolamentoRepository.findOne(idIsolamento);
+			Hospital isolamento = hospitalRepository.findOne(idHospital);
 			isolamento.setInativo(true);
-			isolamentoRepository.save(isolamento);
+			hospitalRepository.save(isolamento);
 
-			response.setData(idIsolamento);
+			response.setData(idHospital);
 			return ResponseEntity.ok(response);
 		}
 	}
+
 }
