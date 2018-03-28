@@ -54,7 +54,7 @@ public class IsolamentoController {
 			return ResponseEntity.badRequest().body(response);
 		} else {
 			isolamento = isolamentoRepository.save(isolamento);
-			response.setData(isolamento.getId_Isolamento());
+			response.setData(isolamento.getIdIsolamento());
 
 			return ResponseEntity.ok(response);
 		}
@@ -79,7 +79,7 @@ public class IsolamentoController {
 			return ResponseEntity.badRequest().body(response);
 		} else {
 
-			isolamento.setId_Isolamento(idIsolamento);
+			isolamento.setIdIsolamento(idIsolamento);
 			isolamentoRepository.save(isolamento);
 			response.setData(idIsolamento);
 

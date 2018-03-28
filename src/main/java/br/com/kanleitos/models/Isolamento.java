@@ -11,18 +11,18 @@ public class Isolamento {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id_Isolamento;
+	private long idIsolamento;
 
 	@NotNull
 	private String nome;
 	private boolean inativo;
 
-	public long getId_Isolamento() {
-		return id_Isolamento;
+	public long getIdIsolamento() {
+		return idIsolamento;
 	}
 
-	public void setId_Isolamento(long id_Isolamento) {
-		this.id_Isolamento = id_Isolamento;
+	public void setIdIsolamento(long idIsolamento) {
+		this.idIsolamento = idIsolamento;
 	}
 
 	public String getNome() {
@@ -43,7 +43,7 @@ public class Isolamento {
 
 	@Override
 	public String toString() {
-		return "Isolamento [id_Isolamento=" + id_Isolamento + ", nome=" + nome + ", inativo=" + inativo + "]";
+		return "Isolamento [id Isolamento=" + idIsolamento + ", nome=" + nome + ", inativo=" + inativo + "]";
 	}
 
 }
