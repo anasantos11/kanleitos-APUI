@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import br.com.kanleitos.models.Paciente;
 import br.com.kanleitos.repository.PacienteRepository;
+import br.com.kanleitos.repository.RegistroInternacaoRepository;
 import br.com.kanleitos.util.Response;
 
 @Controller
@@ -21,6 +22,9 @@ public class PacienteController {
 
 	@Autowired
 	private PacienteRepository pacienteRepository;
+
+	@Autowired
+	private RegistroInternacaoRepository registroRepository;
 
 	@PostMapping("paciente")
 	public @ResponseBody ResponseEntity<Response<Long>> cadastrarPaciente(@RequestBody Paciente paciente) {
@@ -59,6 +63,17 @@ public class PacienteController {
 
 		Response<Paciente> response = new Response<>();
 		response.setData(paciente);
+		return ResponseEntity.ok(response);
+	}
+
+	@GetMapping("/pacientesByEnfermaria")
+	public @ResponseBody ResponseEntity<Response<List<Paciente>>> listarPacientesByEnfermaria(
+			@RequestParam Long idEnfermaria) {
+
+		List<Paciente> pacientesInternados = registroRepository.findAllPacientesbyEnfermaria(idEnfermaria);
+
+		Response<List<Paciente>> response = new Response<>();
+		response.setData(pacientesInternados);
 		return ResponseEntity.ok(response);
 	}
 

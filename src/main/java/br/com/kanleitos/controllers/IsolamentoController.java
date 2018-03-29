@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import br.com.kanleitos.models.Isolamento;
 import br.com.kanleitos.repository.IsolamentoRepository;
+import br.com.kanleitos.repository.RegistroInternacaoRepository;
 import br.com.kanleitos.util.Response;
 import br.com.kanleitos.validators.IsolamentoValidator;
 
@@ -27,6 +28,9 @@ public class IsolamentoController {
 
 	@Autowired
 	private IsolamentoRepository isolamentoRepository;
+
+	@Autowired
+	private RegistroInternacaoRepository registroRepository;
 
 	@InitBinder("isolamento")
 	public void initBinder(WebDataBinder binder) {
@@ -104,4 +108,14 @@ public class IsolamentoController {
 			return ResponseEntity.ok(response);
 		}
 	}
+
+	@GetMapping("/isolamentosPedidosConcluidos")
+	public @ResponseBody ResponseEntity<Response<List<String>>> pedidosConcluidos(@RequestParam Long idEnfermaria) {
+		List<String> nomeIsolamentos = registroRepository.findAllIsolamentoNomebyEnfermaria(idEnfermaria);
+
+		Response<List<String>> response = new Response<>();
+		response.setData(nomeIsolamentos);
+		return ResponseEntity.ok(response);
+	}
+
 }

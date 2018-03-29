@@ -24,4 +24,8 @@ public interface RegistroInternacaoRepository extends JpaRepository<RegistroInte
 	List<PedidoInternacao> findAllByPedidoInternacaoAndStatusRegistro(PedidoInternacao pedidoInternacao,
 			StatusRegistro statusRegistro);
 
+	@Query("SELECT ri.pedidoInternacao.isolamento FROM RegistroInternacao ri "
+			+ "WHERE ri.statusRegistro = 'EM_ANDAMENTO' AND ri.enfermaria.idEnfermaria = :idEnfermaria")
+	List<String> findAllIsolamentoNomebyEnfermaria(@Param("idEnfermaria") Long idEnfermaria);
+
 }

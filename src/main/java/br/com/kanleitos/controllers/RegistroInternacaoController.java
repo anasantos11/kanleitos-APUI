@@ -8,10 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import br.com.kanleitos.models.Paciente;
 import br.com.kanleitos.models.PedidoInternacao;
 import br.com.kanleitos.models.RegistroInternacao;
 import br.com.kanleitos.repository.LeitoRepository;
@@ -61,17 +59,6 @@ public class RegistroInternacaoController {
 			return ResponseEntity.badRequest().body(response);
 		}
 
-	}
-
-	@GetMapping("/pacientesByEnfermaria")
-	public @ResponseBody ResponseEntity<Response<List<Paciente>>> listarPacientesByEnfermaria(
-			@RequestParam Long idEnfermaria) {
-
-		List<Paciente> pacientesInternados = registroRepository.findAllPacientesbyEnfermaria(idEnfermaria);
-
-		Response<List<Paciente>> response = new Response<>();
-		response.setData(pacientesInternados);
-		return ResponseEntity.ok(response);
 	}
 
 	@GetMapping("/pacientesInternados")
