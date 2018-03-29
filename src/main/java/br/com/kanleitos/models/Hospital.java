@@ -63,6 +63,14 @@ public class Hospital {
 		this.inativo = inativo;
 	}
 
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+
 	@Override
 	public String toString() {
 		return "Hospital [id_hospital=" + id_hospital + ", nome=" + nome + ", endereco=" + endereco + ", telefone="
