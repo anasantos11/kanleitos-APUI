@@ -19,9 +19,9 @@ public enum StatusRegistro {
 			return StatusRegistro.EM_ANDAMENTO;
 		case "Alta":
 			return StatusRegistro.ALTA;
-		case "�bito":
+		case "Óbito":
 			return StatusRegistro.OBITO;
-		case "Transfer�ncia":
+		case "Transferência":
 			return StatusRegistro.TRANSFERENCIA;
 		default:
 			throw new IllegalArgumentException("Unknown" + statusRegistro);

@@ -2,6 +2,8 @@ package br.com.kanleitos.models;
 
 import java.util.Date;
 
+import javax.persistence.ColumnResult;
+import javax.persistence.ConstructorResult;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -10,8 +12,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.SqlResultSetMapping;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
@@ -19,6 +23,15 @@ import javax.validation.constraints.NotNull;
 import br.com.kanleitos.util.StatusRegistro;
 
 @Entity
+@SqlResultSetMapping(name = "findAllPacientesbyEnfermaria", classes = @ConstructorResult(targetClass = Paciente.class, columns = {
+		@ColumnResult(name = "num_prontuario"), @ColumnResult(name = "data_nascimento"), @ColumnResult(name = "genero"),
+		@ColumnResult(name = "idade"), @ColumnResult(name = "nome_mae"), @ColumnResult(name = "nome_paciente")
+
+}))
+@NamedNativeQuery(name = "findAllPacientesbyEnfermaria", query = "SELECT paciente.* FROM registro_internacao "
+		+ "JOIN pedido_internacao ON registro_internacao.id_pedido_internacao = pedido_internacao.id_pedido_internacao "
+		+ "JOIN paciente ON pedido_internacao.id_paciente = paciente.num_prontuario "
+		+ "WHERE registro_internacao.id_enfermaria  = :id_enfermaria AND registro_internacao.status_registro = 'EM_ANDAMENTO'")
 public class RegistroInternacao {
 
 	@Id

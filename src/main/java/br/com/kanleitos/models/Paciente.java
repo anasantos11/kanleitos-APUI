@@ -29,6 +29,16 @@ public class Paciente {
 	@Temporal(TemporalType.DATE)
 	private Date dataNascimento;
 
+	public Paciente(long numProntuario, Date dataNascimento, String genero, int idade, String nomeMae,
+			String nomePaciente) {
+		this.numProntuario = numProntuario;
+		this.nomePaciente = nomePaciente;
+		this.idade = idade;
+		this.genero = genero;
+		this.nomeMae = nomeMae;
+		this.dataNascimento = dataNascimento;
+	}
+
 	public Paciente() {
 		setDataNascimento(null);
 		setGenero(null);

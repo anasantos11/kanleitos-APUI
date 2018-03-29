@@ -74,7 +74,7 @@ public class HospitalController {
 			return ResponseEntity.badRequest().body(response);
 		} else if (!hospitalRepository.exists(idHospital)) {
 			response.setData(null);
-			response.addError("Não conseguimos encontrar este isolamento");
+			response.addError("Não conseguimos encontrar este hospital");
 
 			return ResponseEntity.badRequest().body(response);
 		} else {
@@ -92,7 +92,7 @@ public class HospitalController {
 		Response<Integer> response = new Response<Integer>();
 		if (!hospitalRepository.exists(idHospital)) {
 			response.setData(null);
-			response.addError("Não conseguimos encontrar este isolamento");
+			response.addError("Não conseguimos encontrar este hospital");
 
 			return ResponseEntity.badRequest().body(response);
 		} else {
