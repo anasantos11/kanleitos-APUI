@@ -53,6 +53,7 @@ public class PedidoInternacao {
 	private StatusPedido statusPedido;
 
 	@ManyToOne
+	@JoinColumn(name = "idIsolamento", nullable = true)
 	private Isolamento isolamento;
 
 	public PedidoInternacao() {
