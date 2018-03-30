@@ -104,5 +104,23 @@ public class HospitalController {
 			return ResponseEntity.ok(response);
 		}
 	}
+	
+	@PostMapping("/ativarHospital")
+	public @ResponseBody ResponseEntity<Response<Integer>> ativarHospital(@RequestBody Integer idHospital) {
+		Response<Integer> response = new Response<Integer>();
+		if (!hospitalRepository.exists(idHospital)) {
+			response.setData(null);
+			response.addError("Não conseguimos encontrar este hospital");
+
+			return ResponseEntity.badRequest().body(response);
+		} else {
+			Hospital hosp = hospitalRepository.findOne(idHospital);
+			hosp.setInativo(false);
+			hospitalRepository.save(hosp);
+
+			response.setData(idHospital);
+			return ResponseEntity.ok(response);
+		}
+	}
 
 }

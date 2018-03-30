@@ -108,6 +108,24 @@ public class IsolamentoController {
 			return ResponseEntity.ok(response);
 		}
 	}
+	
+	@PostMapping("/ativarIsolamento")
+	public @ResponseBody ResponseEntity<Response<Long>> ativarIsolamento(@RequestBody Long idIsolamento) {
+		Response<Long> response = new Response<Long>();
+		if (!isolamentoRepository.exists(idIsolamento)) {
+			response.setData(null);
+			response.addError("Não conseguimos encontrar este isolamento");
+
+			return ResponseEntity.badRequest().body(response);
+		} else {
+			Isolamento isolamento = isolamentoRepository.findOne(idIsolamento);
+			isolamento.setInativo(false);
+			isolamentoRepository.save(isolamento);
+
+			response.setData(idIsolamento);
+			return ResponseEntity.ok(response);
+		}
+	}
 
 	@GetMapping("/isolamentosPedidosConcluidos")
 	public @ResponseBody ResponseEntity<Response<List<String>>> pedidosConcluidos(@RequestParam Long idEnfermaria) {
