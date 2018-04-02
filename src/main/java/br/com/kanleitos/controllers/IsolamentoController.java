@@ -1,6 +1,7 @@
 package br.com.kanleitos.controllers;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.validation.Valid;
 
@@ -128,11 +129,10 @@ public class IsolamentoController {
 	}
 
 	@GetMapping("/isolamentosPedidosConcluidos")
-	public @ResponseBody ResponseEntity<Response<List<String>>> pedidosConcluidos(@RequestParam Long idEnfermaria) {
-		List<String> nomeIsolamentos = registroRepository.findAllIsolamentoNomebyEnfermaria(idEnfermaria);
-
-		Response<List<String>> response = new Response<>();
-		response.setData(nomeIsolamentos);
+	public @ResponseBody ResponseEntity<Response<Set<String>>> pedidosConcluidos(@RequestParam Long idEnfermaria) {
+		Set<String> isolamentosSemRepeticao = registroRepository.findAllIsolamentoNomebyEnfermaria(idEnfermaria);
+		Response<Set<String>> response = new Response<>();
+		response.setData(isolamentosSemRepeticao);
 		return ResponseEntity.ok(response);
 	}
 

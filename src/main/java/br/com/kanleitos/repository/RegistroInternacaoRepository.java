@@ -1,6 +1,7 @@
 package br.com.kanleitos.repository;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -24,8 +25,8 @@ public interface RegistroInternacaoRepository extends JpaRepository<RegistroInte
 	List<PedidoInternacao> findAllByPedidoInternacaoAndStatusRegistro(PedidoInternacao pedidoInternacao,
 			StatusRegistro statusRegistro);
 
-	@Query("SELECT ri.pedidoInternacao.isolamento FROM RegistroInternacao ri "
+	@Query("SELECT ri.pedidoInternacao.isolamento.nome FROM RegistroInternacao ri "
 			+ "WHERE ri.statusRegistro = 'EM_ANDAMENTO' AND ri.enfermaria.idEnfermaria = :idEnfermaria")
-	List<String> findAllIsolamentoNomebyEnfermaria(@Param("idEnfermaria") Long idEnfermaria);
+	Set<String> findAllIsolamentoNomebyEnfermaria(@Param("idEnfermaria") Long idEnfermaria);
 
 }
