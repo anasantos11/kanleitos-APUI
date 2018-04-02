@@ -5,9 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,7 +17,6 @@ import br.com.kanleitos.repository.PacienteRepository;
 import br.com.kanleitos.repository.PedidoInternacaoRepository;
 import br.com.kanleitos.util.Response;
 import br.com.kanleitos.util.StatusPedido;
-import br.com.kanleitos.validators.FinalizarValidator;
 
 @Controller
 public class PedidoInternacaoController {
@@ -29,11 +26,6 @@ public class PedidoInternacaoController {
 
 	@Autowired
 	private PacienteRepository pacienteRepository;
-
-	@InitBinder("finalizar")
-	public void initBinder(WebDataBinder binder) {
-		binder.setValidator(new FinalizarValidator());
-	}
 
 	@PostMapping("pedidoInternacao")
 	public @ResponseBody ResponseEntity<Response<Long>> pedidoInternacao(
