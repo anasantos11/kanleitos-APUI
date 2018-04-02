@@ -2,14 +2,19 @@ package br.com.kanleitos.controllers;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import br.com.kanleitos.models.FinalizarInternacao;
+import br.com.kanleitos.models.Leito;
 import br.com.kanleitos.models.PedidoInternacao;
 import br.com.kanleitos.models.RegistroInternacao;
 import br.com.kanleitos.repository.LeitoRepository;
@@ -69,5 +74,33 @@ public class RegistroInternacaoController {
 		Response<List<RegistroInternacao>> response = new Response<>();
 		response.setData(pacientesInternados);
 		return ResponseEntity.ok(response);
+	}
+
+	@PostMapping("/encerrarInternacao")
+	public @ResponseBody ResponseEntity<Response<Long>> encerrarInternacao(
+			@Valid @RequestBody FinalizarInternacao finalizarInternacao, BindingResult result) {
+		Response<Long> response = new Response<Long>();
+
+		if (result.hasErrors()) {
+			response.setData(null);
+			result.getAllErrors().forEach(error -> response.addError(error.getCode()));
+
+			return ResponseEntity.badRequest().body(response);
+		} else {
+			RegistroInternacao registroInternacao = registroRepository
+					.getOne(finalizarInternacao.getIdRegistroInternacao());
+
+			Leito leito = registroInternacao.getLeito();
+			leito.setStatusLeito(TipoStatusLeito.DESOCUPADO);
+
+			registroInternacao.setDataAlta(finalizarInternacao.getDataFinalizacao());
+			registroInternacao.setStatusRegistro(finalizarInternacao.getStatus());
+
+			registroRepository.save(registroInternacao);
+
+			response.setData(registroInternacao.getIdRegistroInternacao());
+
+			return ResponseEntity.ok(response);
+		}
 	}
 }

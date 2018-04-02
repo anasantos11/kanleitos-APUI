@@ -2,6 +2,7 @@ package br.com.kanleitos.models;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -34,7 +35,7 @@ public class RegistroInternacao {
 	@JoinColumn(name = "idEnfermaria", nullable = false)
 	private Enfermaria enfermaria;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "idLeito", nullable = false)
 	private Leito leito;
 
