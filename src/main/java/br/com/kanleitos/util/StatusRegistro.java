@@ -29,5 +29,4 @@ public enum StatusRegistro {
 			throw new IllegalArgumentException("Unknown" + statusRegistro);
 		}
 	}
-
 }
