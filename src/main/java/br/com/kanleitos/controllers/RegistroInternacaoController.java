@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -24,6 +26,7 @@ import br.com.kanleitos.util.Response;
 import br.com.kanleitos.util.StatusPedido;
 import br.com.kanleitos.util.StatusRegistro;
 import br.com.kanleitos.util.TipoStatusLeito;
+import br.com.kanleitos.validators.FinalizarValidator;
 
 @Controller
 public class RegistroInternacaoController {
@@ -36,6 +39,11 @@ public class RegistroInternacaoController {
 
 	@Autowired
 	private LeitoRepository leitoRepository;
+
+	@InitBinder("finalizar")
+	public void initBinder(WebDataBinder binder) {
+		binder.setValidator(new FinalizarValidator());
+	}
 
 	@PostMapping("/registroInternacao")
 	public @ResponseBody ResponseEntity<Response<Long>> registroInternacao(

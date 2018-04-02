@@ -2,7 +2,6 @@ package br.com.kanleitos.models;
 
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -35,7 +34,11 @@ public class RegistroInternacao {
 	@JoinColumn(name = "idEnfermaria", nullable = false)
 	private Enfermaria enfermaria;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
+	@JoinColumn(name = "id_hospital", nullable = false)
+	private Hospital hospital;
+
+	@ManyToOne
 	@JoinColumn(name = "idLeito", nullable = false)
 	private Leito leito;
 
@@ -123,12 +126,20 @@ public class RegistroInternacao {
 		this.statusRegistro = statusRegistro;
 	}
 
+	public Hospital getHospital() {
+		return hospital;
+	}
+
+	public void setHospital(Hospital hospital) {
+		this.hospital = hospital;
+	}
+
 	@Override
 	public String toString() {
 		return "RegistroInternacao [idRegistroInternacao=" + idRegistroInternacao + ", pedidoInternacao="
-				+ pedidoInternacao + ", enfermaria=" + enfermaria + ", leito=" + leito + ", dataInternacao="
-				+ dataInternacao + ", previsaoAlta=" + previsaoAlta + ", dataAlta=" + dataAlta + ", statusRegistro="
-				+ statusRegistro + "]";
+				+ pedidoInternacao + ", enfermaria=" + enfermaria + ", hospital=" + hospital + ", leito=" + leito
+				+ ", dataInternacao=" + dataInternacao + ", previsaoAlta=" + previsaoAlta + ", dataAlta=" + dataAlta
+				+ ", statusRegistro=" + statusRegistro + "]";
 	}
 
 }
