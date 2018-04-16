@@ -35,6 +35,10 @@ public class RegistroInternacao {
 	private Enfermaria enfermaria;
 
 	@ManyToOne
+	@JoinColumn(name = "id_hospital", nullable = false)
+	private Hospital hospital;
+
+	@ManyToOne
 	@JoinColumn(name = "idLeito", nullable = false)
 	private Leito leito;
 
@@ -122,12 +126,20 @@ public class RegistroInternacao {
 		this.statusRegistro = statusRegistro;
 	}
 
+	public Hospital getHospital() {
+		return hospital;
+	}
+
+	public void setHospital(Hospital hospital) {
+		this.hospital = hospital;
+	}
+
 	@Override
 	public String toString() {
-		return "RegistroInternacao [idRegistroInternacao=" + idRegistroInternacao + ", pedidoInternacao=" + pedidoInternacao
-				+ ", enfermaria=" + enfermaria + ", leito=" + leito + ", dataInternacao=" + dataInternacao
-				+ ", previsaoAlta=" + previsaoAlta + ", dataAlta=" + dataAlta + ", statusRegistro=" + statusRegistro
-				+ "]";
+		return "RegistroInternacao [idRegistroInternacao=" + idRegistroInternacao + ", pedidoInternacao="
+				+ pedidoInternacao + ", enfermaria=" + enfermaria + ", hospital=" + hospital + ", leito=" + leito
+				+ ", dataInternacao=" + dataInternacao + ", previsaoAlta=" + previsaoAlta + ", dataAlta=" + dataAlta
+				+ ", statusRegistro=" + statusRegistro + "]";
 	}
 
 }

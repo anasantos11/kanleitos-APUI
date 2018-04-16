@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import br.com.kanleitos.models.Paciente;
 import br.com.kanleitos.repository.PacienteRepository;
+import br.com.kanleitos.repository.RegistroInternacaoRepository;
 import br.com.kanleitos.util.Response;
 
 @Controller
@@ -20,16 +21,19 @@ import br.com.kanleitos.util.Response;
 public class PacienteController {
 
 	@Autowired
-	private PacienteRepository repository;
+	private PacienteRepository pacienteRepository;
+
+	@Autowired
+	private RegistroInternacaoRepository registroRepository;
 
 	@PostMapping("paciente")
 	public @ResponseBody ResponseEntity<Response<Long>> cadastrarPaciente(@RequestBody Paciente paciente) {
 
-		boolean exists = repository.existsByNumProntuario(paciente.getNumProntuario());
+		boolean exists = pacienteRepository.existsByNumProntuario(paciente.getNumProntuario());
 		Response<Long> response = new Response<Long>();
 
 		if (!exists) {
-			repository.save(paciente);
+			pacienteRepository.save(paciente);
 			response.setData(paciente.getNumProntuario());
 			return ResponseEntity.ok(response);
 		} else {
@@ -40,7 +44,7 @@ public class PacienteController {
 
 	@GetMapping("pacientes")
 	public @ResponseBody ResponseEntity<Response<List<Paciente>>> listarPacientes() {
-		List<Paciente> pacientes = repository.findAll();
+		List<Paciente> pacientes = pacienteRepository.findAll();
 
 		Response<List<Paciente>> response = new Response<>();
 		response.setData(pacientes);
@@ -52,13 +56,24 @@ public class PacienteController {
 			String nomeMae) {
 		Paciente paciente = null;
 		if (numProntuario != null) {
-			paciente = repository.findByNumProntuario(numProntuario);
+			paciente = pacienteRepository.findByNumProntuario(numProntuario);
 		} else {
-			paciente = repository.findByNomeMae(nomeMae);
+			paciente = pacienteRepository.findByNomeMae(nomeMae);
 		}
 
 		Response<Paciente> response = new Response<>();
 		response.setData(paciente);
+		return ResponseEntity.ok(response);
+	}
+
+	@GetMapping("/pacientesByEnfermaria")
+	public @ResponseBody ResponseEntity<Response<List<Paciente>>> listarPacientesByEnfermaria(
+			@RequestParam Long idEnfermaria) {
+
+		List<Paciente> pacientesInternados = registroRepository.findAllPacientesbyEnfermaria(idEnfermaria);
+
+		Response<List<Paciente>> response = new Response<>();
+		response.setData(pacientesInternados);
 		return ResponseEntity.ok(response);
 	}
 

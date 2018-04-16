@@ -1,7 +1,7 @@
 package br.com.kanleitos.util;
 
 public enum StatusRegistro {
-	EM_ANDAMENTO("Em Andamento"), ALTA("Alta"), OBITO("Óbito"), TRANSFERENCIA("Transferência");
+	EM_ANDAMENTO("Em Andamento"), ALTA("Alta"), OBITO("Óbito"), TRANSFERENCIA("Transferência"), PAD("PAD");
 
 	private String nome;
 
@@ -19,13 +19,14 @@ public enum StatusRegistro {
 			return StatusRegistro.EM_ANDAMENTO;
 		case "Alta":
 			return StatusRegistro.ALTA;
-		case "�bito":
+		case "Óbito":
 			return StatusRegistro.OBITO;
-		case "Transfer�ncia":
+		case "Transferência":
 			return StatusRegistro.TRANSFERENCIA;
+		case "PAD":
+			return StatusRegistro.PAD;
 		default:
 			throw new IllegalArgumentException("Unknown" + statusRegistro);
 		}
 	}
-
 }
