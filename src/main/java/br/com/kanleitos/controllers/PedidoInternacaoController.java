@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import br.com.kanleitos.models.Filtro;
 import br.com.kanleitos.models.Paciente;
 import br.com.kanleitos.models.PedidoInternacao;
+import br.com.kanleitos.predicates.PedidoInternacaoPredicate;
 import br.com.kanleitos.repository.PacienteRepository;
 import br.com.kanleitos.repository.PedidoInternacaoRepository;
 import br.com.kanleitos.util.Response;
@@ -76,11 +78,13 @@ public class PedidoInternacaoController {
 		return ResponseEntity.ok(response);
 	}
 
-	@GetMapping("pedidosEmAberto")
-	public @ResponseBody ResponseEntity<Response<List<PedidoInternacao>>> pedidosEmAndamento() {
-		List<PedidoInternacao> pedidos = repository.findAllByStatusPedidoOrStatusPedido(StatusPedido.PENDENTE,
-				StatusPedido.ATRASADO);
+	@PostMapping("pedidosEmAberto")
+	public @ResponseBody ResponseEntity<Response<List<PedidoInternacao>>> pedidosEmAndamento(
+			@RequestBody Filtro filtros) {
 
+		List<PedidoInternacao> pedidos = (List<PedidoInternacao>) repository
+				.findAll(PedidoInternacaoPredicate.filtroPesquisa(filtros));
+		
 		Response<List<PedidoInternacao>> response = new Response<>();
 		response.setData(pedidos);
 		return ResponseEntity.ok(response);
