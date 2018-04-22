@@ -1,7 +1,7 @@
 package br.com.kanleitos.util;
 
 public enum StatusPedido {
-	PENDENTE("Pendente"), CONCLUIDO("Concluido"), CANCELADO("Cancelado"), ATRASADO ("Atrasado");
+	PENDENTE("Pendente"), CONCLUIDO("Concluído"), CANCELADO("Cancelado"), ATRASADO ("Atrasado");
 
 	private String nome;
 
@@ -17,7 +17,7 @@ public enum StatusPedido {
 		switch (statusPedido) {
 		case "Pendente":
 			return StatusPedido.PENDENTE;
-		case "Concluido":
+		case "Concluído":
 			return StatusPedido.CONCLUIDO;
 		case "Cancelado":
 			return StatusPedido.CANCELADO;

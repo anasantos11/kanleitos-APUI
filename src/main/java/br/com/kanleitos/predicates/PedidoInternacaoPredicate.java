@@ -19,8 +19,10 @@ public class PedidoInternacaoPredicate {
 		List<Predicate> listPredicates = new ArrayList<>();
 
 		QPedidoInternacao pedido = QPedidoInternacao.pedidoInternacao;
-
-		listPredicates.add(pedido.statusPedido.eq(StatusPedido.PENDENTE));
+		
+		if(filtros.getStatus() != null && !filtros.getStatus().isEmpty()) {
+			listPredicates.add(pedido.statusPedido.eq(StatusPedido.fromName(filtros.getStatus())));		
+		}
 
 		if (filtros.getIdAla() > 0) {
 			listPredicates.add(pedido.ala.idAla.eq(filtros.getIdAla()));

@@ -35,7 +35,7 @@ public class RegistroInternacao {
 	private Enfermaria enfermaria;
 
 	@ManyToOne
-	@JoinColumn(name = "id_hospital", nullable = false)
+	@JoinColumn(name = "id_hospital", nullable = true)
 	private Hospital hospital;
 
 	@ManyToOne
