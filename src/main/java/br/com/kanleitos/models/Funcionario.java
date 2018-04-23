@@ -14,6 +14,10 @@ public class Funcionario {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int idFuncionario;
+	
+	@NotNull
+	private String nome;
+	
 	@NotNull
 	@NotBlank
 	private String especialidade;
@@ -50,6 +54,15 @@ public class Funcionario {
 
 	public void setInativo(boolean inativo) {
 		this.inativo = inativo;
+	}
+	
+	
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	@Override

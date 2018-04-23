@@ -34,7 +34,7 @@ public class FuncionarioController {
 	}
 
 	@PostMapping("/funcionario")
-	public @ResponseBody ResponseEntity<Response<Integer>> cadastrarTipo(@Valid @RequestBody Funcionario funcionario,
+	public @ResponseBody ResponseEntity<Response<Integer>> cadastrarFuncionario(@Valid @RequestBody Funcionario funcionario,
 			BindingResult result) {
 		Response<Integer> response = new Response<Integer>();
 
@@ -42,17 +42,21 @@ public class FuncionarioController {
 	}
 
 	@GetMapping("/funcionario")
-	public @ResponseBody ResponseEntity<Response<List<Funcionario>>> getPendenciasByStatus(
-			@RequestParam boolean inativo) {
+	public @ResponseBody ResponseEntity<Response<List<Funcionario>>> getFuncionariosByStatus(
+			@RequestParam(value="somenteAtivos", required=false)  boolean somenteAtivos) {
 		Response<List<Funcionario>> response = new Response<List<Funcionario>>();
 
-		response.setData(repo.findAllByInativo(inativo));
+		if(somenteAtivos) {
+			response.setData(repo.findAllByInativo(false));
+		}else {
+			response.setData(repo.findAll());
+		}
 
 		return ResponseEntity.ok(response);
 	}
 
 	@PutMapping("/funcionario")
-	public @ResponseBody ResponseEntity<Response<Integer>> atualizarTipo(@Valid @RequestBody Funcionario funcionario,
+	public @ResponseBody ResponseEntity<Response<Integer>> atualizarFuncionario( @RequestBody Funcionario funcionario,
 			BindingResult result) {
 		Response<Integer> response = new Response<Integer>();
 
