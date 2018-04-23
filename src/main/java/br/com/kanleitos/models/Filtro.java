@@ -4,15 +4,42 @@ import java.util.Date;
 
 public class Filtro {
 	private long idAla;
+	private long idEnfermaria;
+	private long idLeito;
 	private long idMedico;
 	private long idResidente;
 	private long idIsolamento;
 	private String nomePaciente;
 	private long numProntuario;
 	private Date dataAdmissao;
+	private Date previsaoAlta;
 	private String medicoResponsavel;
 	private String residenteResponsavel;
 	private String status;
+	
+	public long getIdEnfermaria() {
+		return idEnfermaria;
+	}
+
+	public void setIdEnfermaria(long idEnfermaria) {
+		this.idEnfermaria = idEnfermaria;
+	}
+
+	public long getIdLeito() {
+		return idLeito;
+	}
+
+	public void setIdLeito(long idLeito) {
+		this.idLeito = idLeito;
+	}
+
+	public Date getPrevisaoAlta() {
+		return previsaoAlta;
+	}
+
+	public void setPrevisaoAlta(Date previsaoAlta) {
+		this.previsaoAlta = previsaoAlta;
+	}
 
 	public long getIdAla() {
 		return idAla;

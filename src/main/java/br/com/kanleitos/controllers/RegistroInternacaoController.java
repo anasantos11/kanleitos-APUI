@@ -9,16 +9,17 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import br.com.kanleitos.models.Filtro;
 import br.com.kanleitos.models.FinalizarInternacao;
 import br.com.kanleitos.models.Leito;
 import br.com.kanleitos.models.PedidoInternacao;
 import br.com.kanleitos.models.RegistroInternacao;
+import br.com.kanleitos.predicates.RegistroInternacaoPredicate;
 import br.com.kanleitos.repository.LeitoRepository;
 import br.com.kanleitos.repository.PedidoInternacaoRepository;
 import br.com.kanleitos.repository.RegistroInternacaoRepository;
@@ -74,10 +75,11 @@ public class RegistroInternacaoController {
 
 	}
 
-	@GetMapping("/pacientesInternados")
-	public @ResponseBody ResponseEntity<Response<List<RegistroInternacao>>> listarInternacoes() {
-		List<RegistroInternacao> pacientesInternados = registroRepository
-				.findAllByStatusRegistro(StatusRegistro.EM_ANDAMENTO);
+	@PostMapping("/pacientesInternados")
+	public @ResponseBody ResponseEntity<Response<List<RegistroInternacao>>> listarInternacoes(@RequestBody Filtro filtros) {
+		
+		List<RegistroInternacao> pacientesInternados = (List<RegistroInternacao>) registroRepository
+				.findAll(RegistroInternacaoPredicate.filtroPesquisa(filtros));
 
 		Response<List<RegistroInternacao>> response = new Response<>();
 		response.setData(pacientesInternados);

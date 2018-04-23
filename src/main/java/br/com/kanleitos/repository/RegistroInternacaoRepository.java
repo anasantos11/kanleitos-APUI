@@ -5,6 +5,7 @@ import java.util.Set;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.querydsl.QueryDslPredicateExecutor;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
@@ -14,7 +15,8 @@ import br.com.kanleitos.models.RegistroInternacao;
 import br.com.kanleitos.util.StatusRegistro;
 
 @Repository
-public interface RegistroInternacaoRepository extends JpaRepository<RegistroInternacao, Long> {
+public interface RegistroInternacaoRepository
+		extends JpaRepository<RegistroInternacao, Long>, QueryDslPredicateExecutor<RegistroInternacao> {
 
 	List<RegistroInternacao> findAllByStatusRegistro(StatusRegistro statusRegistro);
 
