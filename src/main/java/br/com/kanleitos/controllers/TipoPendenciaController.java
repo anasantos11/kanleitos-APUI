@@ -43,17 +43,21 @@ public class TipoPendenciaController {
 
 	@GetMapping("/tipoPendencia")
 	public @ResponseBody ResponseEntity<Response<List<TipoPendencia>>> getPendenciasByStatus(
-			@RequestParam boolean inativo) {
+			@RequestParam(value="somenteAtivos", required=false)  boolean somenteAtivos) {
 		Response<List<TipoPendencia>> response = new Response<List<TipoPendencia>>();
 
-		response.setData(repo.findAllByInativo(inativo));
+		if(somenteAtivos) {
+			response.setData(repo.findAllByInativo(false));
+		}else {
+			response.setData(repo.findAll());
+		}
 
 		return ResponseEntity.ok(response);
 	}
 
 	@PutMapping("/tipoPendencia")
 	public @ResponseBody ResponseEntity<Response<Integer>> atualizarTipo(
-			@Valid @RequestBody TipoPendencia tipoPendencia, BindingResult result) {
+			@RequestBody TipoPendencia tipoPendencia, BindingResult result) {
 		Response<Integer> response = new Response<Integer>();
 
 		return persistTipoPendencia(tipoPendencia, result, response);
