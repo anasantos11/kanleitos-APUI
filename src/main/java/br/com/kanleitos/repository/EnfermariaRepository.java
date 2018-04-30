@@ -12,4 +12,6 @@ import br.com.kanleitos.models.Enfermaria;
 public interface EnfermariaRepository extends JpaRepository<Enfermaria, Long> {
 
 	List<Enfermaria> findAllByAla(Ala ala);
+
+	List<Enfermaria> findAllByInativa(boolean inativa);
 }

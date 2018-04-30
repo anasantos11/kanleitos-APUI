@@ -24,8 +24,8 @@ public class EnfermariaController {
 	private AlaRepository alaRepository;
 
 	@GetMapping("enfermarias")
-	public @ResponseBody ResponseEntity<Response<List<Enfermaria>>> listarEnfermarias() {
-		List<Enfermaria> enfermarias = repository.findAll();
+	public @ResponseBody ResponseEntity<Response<List<Enfermaria>>> listarEnfermarias(@RequestParam boolean ativo) {
+		List<Enfermaria> enfermarias = ativo ? repository.findAllByInativa(false) : repository.findAll();
 
 		Response<List<Enfermaria>> response = new Response<>();
 		response.setData(enfermarias);

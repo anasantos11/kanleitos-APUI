@@ -26,8 +26,8 @@ public class LeitoController {
 	private EnfermariaRepository repositoryEnfermaria;
 
 	@GetMapping("leitos")
-	public @ResponseBody ResponseEntity<Response<List<Leito>>> listarLeitos() {
-		List<Leito> leitos = repository.findAll();
+	public @ResponseBody ResponseEntity<Response<List<Leito>>> listarLeitos(@RequestParam boolean ativo) {
+		List<Leito> leitos = ativo ? repository.findAllByStatusLeitoNotInativo() : repository.findAll();
 
 		Response<List<Leito>> response = new Response<>();
 		response.setData(leitos);

@@ -21,8 +21,8 @@ public class AlaController {
 	private AlaRepository repository;
 
 	@GetMapping("alas")
-	public @ResponseBody ResponseEntity<Response<List<Ala>>> listarAlas() {
-		List<Ala> alas = repository.findAll();
+	public @ResponseBody ResponseEntity<Response<List<Ala>>> listarAlas(@RequestParam boolean ativo) {
+		List<Ala> alas = ativo ? repository.findAllByInativa(false) : repository.findAll();
 
 		Response<List<Ala>> response = new Response<>();
 		response.setData(alas);
