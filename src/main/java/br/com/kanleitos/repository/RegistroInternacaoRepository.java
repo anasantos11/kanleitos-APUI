@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 import br.com.kanleitos.models.Paciente;
 import br.com.kanleitos.models.PedidoInternacao;
 import br.com.kanleitos.models.RegistroInternacao;
-import br.com.kanleitos.util.StatusRegistro;
+import br.com.kanleitos.models.enums.StatusRegistro;
 
 @Repository
 public interface RegistroInternacaoRepository

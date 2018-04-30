@@ -1,4 +1,4 @@
-package br.com.kanleitos.util;
+package br.com.kanleitos.models.enums;
 
 public enum StatusRegistro {
 	EM_ANDAMENTO("Em Andamento"), ALTA("Alta"), OBITO("Óbito"), TRANSFERENCIA("Transferência"), PAD("PAD");

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import br.com.kanleitos.models.Enfermaria;
 import br.com.kanleitos.models.Leito;
-import br.com.kanleitos.util.TipoStatusLeito;
+import br.com.kanleitos.models.enums.TipoStatusLeito;
 
 @Repository
 public interface LeitoRepository extends JpaRepository<Leito, Long> {

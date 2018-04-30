@@ -2,7 +2,7 @@ package br.com.kanleitos.models;
 
 import java.util.Date;
 
-import br.com.kanleitos.util.StatusRegistro;
+import br.com.kanleitos.models.enums.StatusRegistro;
 
 public class FinalizarInternacao {
 

@@ -5,9 +5,9 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 import br.com.kanleitos.models.FinalizarInternacao;
+import br.com.kanleitos.models.enums.StatusRegistro;
 import br.com.kanleitos.repository.LeitoRepository;
 import br.com.kanleitos.repository.RegistroInternacaoRepository;
-import br.com.kanleitos.util.StatusRegistro;
 
 public class FinalizarValidator implements Validator {
 
