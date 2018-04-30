@@ -21,14 +21,14 @@ public interface RegistroInternacaoRepository
 	List<RegistroInternacao> findAllByStatusRegistro(StatusRegistro statusRegistro);
 
 	@Query("SELECT ri.pedidoInternacao.paciente FROM RegistroInternacao ri "
-			+ "WHERE ri.statusRegistro = 'EM_ANDAMENTO' AND ri.enfermaria.idEnfermaria = :idEnfermaria")
+			+ "WHERE ri.statusRegistro = 'EM_ANDAMENTO' AND ri.leito.enfermaria.idEnfermaria = :idEnfermaria")
 	List<Paciente> findAllPacientesbyEnfermaria(@Param("idEnfermaria") long idEnfermaria);
 
 	List<PedidoInternacao> findAllByPedidoInternacaoAndStatusRegistro(PedidoInternacao pedidoInternacao,
 			StatusRegistro statusRegistro);
 
 	@Query("SELECT ri.pedidoInternacao.isolamento.nome FROM RegistroInternacao ri "
-			+ "WHERE ri.statusRegistro = 'EM_ANDAMENTO' AND ri.enfermaria.idEnfermaria = :idEnfermaria")
+			+ "WHERE ri.statusRegistro = 'EM_ANDAMENTO' AND ri.leito.enfermaria.idEnfermaria = :idEnfermaria")
 	Set<String> findAllIsolamentoNomebyEnfermaria(@Param("idEnfermaria") Long idEnfermaria);
 
 }

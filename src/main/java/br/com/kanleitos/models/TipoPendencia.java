@@ -38,7 +38,7 @@ public class TipoPendencia {
 	public int getIdPendencia() {
 		return idPendencia;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "TipoPendencia [idPendencia=" + idPendencia + ", nome=" + nome + ", inativo=" + inativo + "]";
