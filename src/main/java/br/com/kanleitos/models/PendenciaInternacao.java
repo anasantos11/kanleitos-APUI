@@ -1,21 +1,33 @@
 package br.com.kanleitos.models;
 
-import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 @Entity
-public class PendenciaInternacao implements Serializable {
+public class PendenciaInternacao {
 
-	private static final long serialVersionUID = 3282951803951126808L;
-
-	@EmbeddedId
-	private PendenciaInternacaoId id;
+	@Id
+	@SequenceGenerator(name = "PENDENCIA_INTERNACAO_ID", initialValue = 1)
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "PENDENCIA_INTERNACAO_ID")
+	private Long idPendenciaInternacao;
+	
+	@ManyToOne
+	@JoinColumn(name = "idRegistroInternacao", nullable = false)
+	private RegistroInternacao registroInternacao;
+	
+	@ManyToOne
+	@JoinColumn(name = "idTipoPendencia", nullable = false)
+	private TipoPendencia tipoPendencia;
 
 	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
@@ -63,12 +75,24 @@ public class PendenciaInternacao implements Serializable {
 		this.observacao = observacao;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	public RegistroInternacao getRegistroInternacao() {
+		return registroInternacao;
 	}
 
-	public PendenciaInternacaoId getId() {
-		return id;
+	public void setRegistroInternacao(RegistroInternacao registroInternacao) {
+		this.registroInternacao = registroInternacao;
+	}
+
+	public TipoPendencia getTipoPendencia() {
+		return tipoPendencia;
+	}
+
+	public void setTipoPendencia(TipoPendencia tipoPendencia) {
+		this.tipoPendencia = tipoPendencia;
+	}
+
+	public Long getIdPendenciaInternacao() {
+		return idPendenciaInternacao;
 	}
 
 	

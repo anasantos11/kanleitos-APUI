@@ -34,9 +34,9 @@ public class PendenciaInternacaoController {
 	}
 
 	@PostMapping("/pendenciaInternacao")
-	public @ResponseBody ResponseEntity<Response<Integer>> cadastrarPendenciaInternacao(
+	public @ResponseBody ResponseEntity<Response<Long>> cadastrarPendenciaInternacao(
 			@Valid @RequestBody PendenciaInternacao pendenciaInternacao, BindingResult result) {
-		Response<Integer> response = new Response<Integer>();
+		Response<Long> response = new Response<Long>();
 
 		return persistPendenciaInternacao(pendenciaInternacao, result, response);
 	}
@@ -51,15 +51,15 @@ public class PendenciaInternacaoController {
 	}
 	
 	@PutMapping("/pendenciaInternacao")
-	public @ResponseBody ResponseEntity<Response<Integer>> updatePendenciaInternacao(
+	public @ResponseBody ResponseEntity<Response<Long>> updatePendenciaInternacao(
 			@RequestBody PendenciaInternacao pendenciaInternacao, BindingResult result) {
-		Response<Integer> response = new Response<Integer>();
+		Response<Long> response = new Response<Long>();
 
 		return persistPendenciaInternacao(pendenciaInternacao, result, response);
 	}
 
-	private ResponseEntity<Response<Integer>> persistPendenciaInternacao(PendenciaInternacao pendenciaInternacao,
-			BindingResult result, Response<Integer> response) {
+	private ResponseEntity<Response<Long>> persistPendenciaInternacao(PendenciaInternacao pendenciaInternacao,
+			BindingResult result, Response<Long> response) {
 
 		if (result.hasErrors()) {
 			response.setData(null);
@@ -68,7 +68,7 @@ public class PendenciaInternacaoController {
 			return ResponseEntity.badRequest().body(response);
 		} else {
 			pendenciaInternacao = repository.save(pendenciaInternacao);
-			response.setData(0);
+			response.setData(pendenciaInternacao.getIdPendenciaInternacao());
 
 			return ResponseEntity.ok(response);
 		}

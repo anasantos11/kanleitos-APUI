@@ -24,8 +24,8 @@ public class PendenciaInternacaoValidator implements Validator {
 
 		Date dataInicio = pendenciaInternacao.getDataInicio();
 		Date previsaoConclusao = pendenciaInternacao.getPrevisaoConclusao();
-		RegistroInternacao registroInternacao = pendenciaInternacao.getId().getRegistroInternacao();
-		TipoPendencia tipoPendencia = pendenciaInternacao.getId().getTipoPendencia();
+		RegistroInternacao registroInternacao = pendenciaInternacao.getRegistroInternacao();
+		TipoPendencia tipoPendencia = pendenciaInternacao.getTipoPendencia();
 
 		if (dataInicio == null)
 			errors.rejectValue("dataInicio", "A data de início precisa ser informada!");

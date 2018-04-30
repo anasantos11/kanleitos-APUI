@@ -11,6 +11,6 @@ import br.com.kanleitos.models.PendenciaInternacao;
 public interface PendenciaInternacaoRepository extends JpaRepository<PendenciaInternacao, Long>{
 
 	@Query("SELECT pi FROM PendenciaInternacao pi "
-			+ "WHERE pi.id.registroInternacao.idRegistroInternacao = :idRegistroInternacao")
+			+ "WHERE pi.registroInternacao.idRegistroInternacao = :idRegistroInternacao")
 	List<PendenciaInternacao> findAllByIdRegistroInternacao(@Param("idRegistroInternacao") long idRegistroInternacao);
 }
