@@ -2,6 +2,6 @@ package br.com.kanleitos.models.enums;
 
 public enum RotuloTaxaOcupacao {
 
-	GENERO, IDADE
+	GENERO, IDADE, ALA
 
 }
