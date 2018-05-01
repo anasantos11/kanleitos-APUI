@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import br.com.kanleitos.models.TipoExame;
 
 @Repository
-public interface TipoExamaRepository extends JpaRepository<TipoExame, Integer> {
+public interface TipoExameRepository extends JpaRepository<TipoExame, Integer> {
 
 	List<TipoExame> findAllByInativo(boolean inativo);
 

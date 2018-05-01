@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import br.com.kanleitos.models.TipoExame;
-import br.com.kanleitos.repository.TipoExamaRepository;
+import br.com.kanleitos.repository.TipoExameRepository;
 import br.com.kanleitos.util.Response;
 import br.com.kanleitos.validators.TipoExameValidator;
 
@@ -26,7 +26,7 @@ import br.com.kanleitos.validators.TipoExameValidator;
 public class TipoExameController {
 
 	@Autowired
-	private TipoExamaRepository repository;
+	private TipoExameRepository repository;
 
 	@InitBinder("tipoExame")
 	public void initBinder(WebDataBinder binder) {
