@@ -28,4 +28,8 @@ public class TaxaOcupacao {
 		return this;
 	}
 
+	public void addAllTaxas(List<Taxa> taxas) {
+		this.taxas.addAll(taxas);
+	}
+
 }
