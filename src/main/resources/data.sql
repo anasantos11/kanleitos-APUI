@@ -459,7 +459,13 @@ insert into hospital(nome, endereco, telefone, especialidade, inativo) values ('
 insert into hospital(nome, endereco, telefone, especialidade, inativo) values ('Instituto Raul Soares','Av. do Contorno, 3017 (Santa Efigênia)','3132399900 ', 'Urgências psiquiátricas', 0 );
 insert into hospital(nome, endereco, telefone, especialidade, inativo) values ('Centro Psíquico da Adolescência e Infância','Rua Padre Marinho, 150 (Santa Efigênia)','3132353000', 'Urgências psiquiátricas', 0 );
 
+-- TIPOS_PENDENCIAS
 insert into tipo_pendencia values(1, 0, 'Compensação');
 insert into tipo_pendencia values(2, 0, 'Transferência');
 insert into tipo_pendencia values(3, 0, 'Exames');
 insert into tipo_pendencia values(4, 0, 'Antibióticos');
+
+-- TIPOS_EXAMES
+insert into tipo_exame values (1, 0, 'Tomografia');
+insert into tipo_exame values (2, 0, 'Radiografia');
+insert into tipo_exame values (3, 0, 'Ultrassonografia');
