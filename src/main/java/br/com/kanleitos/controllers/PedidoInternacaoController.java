@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import br.com.kanleitos.models.Filtro;
 import br.com.kanleitos.models.Paciente;
 import br.com.kanleitos.models.PedidoInternacao;
+import br.com.kanleitos.models.enums.StatusPedido;
 import br.com.kanleitos.predicates.PedidoInternacaoPredicate;
 import br.com.kanleitos.repository.PacienteRepository;
 import br.com.kanleitos.repository.PedidoInternacaoRepository;
 import br.com.kanleitos.util.Response;
-import br.com.kanleitos.util.StatusPedido;
 
 @Controller
 public class PedidoInternacaoController {

@@ -15,7 +15,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
-import br.com.kanleitos.util.StatusPedido;
+import br.com.kanleitos.models.enums.StatusPedido;
 
 @Entity
 public class PedidoInternacao {

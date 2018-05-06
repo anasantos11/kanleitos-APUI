@@ -5,11 +5,11 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import br.com.kanleitos.models.Ala;
+import br.com.kanleitos.models.TipoExame;
 
 @Repository
-public interface AlaRepository extends JpaRepository<Ala, Long> {
+public interface TipoExameRepository extends JpaRepository<TipoExame, Integer> {
 
-	List<Ala> findAllByInativa(boolean inativa);
+	List<TipoExame> findAllByInativo(boolean inativo);
 
 }

@@ -10,7 +10,7 @@ import com.querydsl.core.types.dsl.Expressions;
 
 import br.com.kanleitos.models.Filtro;
 import br.com.kanleitos.models.QPedidoInternacao;
-import br.com.kanleitos.util.StatusPedido;
+import br.com.kanleitos.models.enums.StatusPedido;
 
 public class PedidoInternacaoPredicate {
 

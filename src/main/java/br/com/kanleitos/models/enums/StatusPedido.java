@@ -1,4 +1,4 @@
-package br.com.kanleitos.util;
+package br.com.kanleitos.models.enums;
 
 public enum StatusPedido {
 	PENDENTE("Pendente"), CONCLUIDO("Concluído"), CANCELADO("Cancelado"), ATRASADO ("Atrasado");

@@ -11,7 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.NotNull;
 
-import br.com.kanleitos.util.TipoStatusLeito;
+import br.com.kanleitos.models.enums.TipoStatusLeito;
 
 @Entity
 

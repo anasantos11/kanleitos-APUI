@@ -9,10 +9,11 @@ import org.springframework.data.querydsl.QueryDslPredicateExecutor;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import br.com.kanleitos.models.Enfermaria;
 import br.com.kanleitos.models.Paciente;
 import br.com.kanleitos.models.PedidoInternacao;
 import br.com.kanleitos.models.RegistroInternacao;
-import br.com.kanleitos.util.StatusRegistro;
+import br.com.kanleitos.models.enums.StatusRegistro;
 
 @Repository
 public interface RegistroInternacaoRepository
@@ -30,5 +31,8 @@ public interface RegistroInternacaoRepository
 	@Query("SELECT ri.pedidoInternacao.isolamento.nome FROM RegistroInternacao ri "
 			+ "WHERE ri.statusRegistro = 'EM_ANDAMENTO' AND ri.leito.enfermaria.idEnfermaria = :idEnfermaria")
 	Set<String> findAllIsolamentoNomebyEnfermaria(@Param("idEnfermaria") Long idEnfermaria);
+
+	@Query("SELECT COUNT(leito) > 0 FROM RegistroInternacao ri WHERE ri.leito.enfermaria = :enfermaria")
+	boolean enfermariaHasLeitosRegistrados(@Param("enfermaria") Enfermaria enfermaria);
 
 }

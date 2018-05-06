@@ -19,14 +19,14 @@ import br.com.kanleitos.models.FinalizarInternacao;
 import br.com.kanleitos.models.Leito;
 import br.com.kanleitos.models.PedidoInternacao;
 import br.com.kanleitos.models.RegistroInternacao;
+import br.com.kanleitos.models.enums.StatusPedido;
+import br.com.kanleitos.models.enums.StatusRegistro;
+import br.com.kanleitos.models.enums.TipoStatusLeito;
 import br.com.kanleitos.predicates.RegistroInternacaoPredicate;
 import br.com.kanleitos.repository.LeitoRepository;
 import br.com.kanleitos.repository.PedidoInternacaoRepository;
 import br.com.kanleitos.repository.RegistroInternacaoRepository;
 import br.com.kanleitos.util.Response;
-import br.com.kanleitos.util.StatusPedido;
-import br.com.kanleitos.util.StatusRegistro;
-import br.com.kanleitos.util.TipoStatusLeito;
 import br.com.kanleitos.validators.FinalizarValidator;
 
 @Controller
