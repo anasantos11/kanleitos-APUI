@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -58,6 +59,21 @@ public class PendenciaInternacaoController {
 		return persistPendenciaInternacao(pendenciaInternacao, result, response);
 	}
 
+	@DeleteMapping("/pendenciaInternacao")
+	public @ResponseBody ResponseEntity<Response<Long>> deletarPendenciaInternacao(@RequestParam Long idPendenciaInternacao) {
+		Response<Long> response = new Response<Long>();
+		PendenciaInternacao pendenciaInternacao = repository.findOne(idPendenciaInternacao);
+
+		if (pendenciaInternacao == null) {
+			response.addError("Pendência de Internação não encontrada");
+			return ResponseEntity.badRequest().body(response);
+		} else {
+			repository.delete(idPendenciaInternacao);
+			response.setData(pendenciaInternacao.getIdPendenciaInternacao());
+			return ResponseEntity.ok(response);
+		}
+	}
+	
 	private ResponseEntity<Response<Long>> persistPendenciaInternacao(PendenciaInternacao pendenciaInternacao,
 			BindingResult result, Response<Long> response) {
 
