@@ -20,7 +20,10 @@ public interface LeitoRepository extends JpaRepository<Leito, Long> {
 
 	@Query("SELECT l FROM Leito l WHERE l.statusLeito != 'INATIVO'")
 	List<Leito> findAllByStatusLeitoNotInativo();
-
+	
+	@Query("SELECT l FROM Leito l WHERE l.enfermaria.ala.idAla = :idAla")
+	List<Leito> findAllByAla(@Param("idAla") Long idAla);
+	
 	@Transactional
 	@Modifying
 	@Query("UPDATE Leito l SET l.statusLeito = :status WHERE l.enfermaria = :enfermaria")

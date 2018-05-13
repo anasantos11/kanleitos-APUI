@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import br.com.kanleitos.models.Enfermaria;
@@ -90,9 +91,9 @@ public class TaxaOcupacaoController {
 	}
 
 	@GetMapping("taxaOcupacao/alas")
-	public @ResponseBody ResponseEntity<Response<TaxaOcupacaoAla>> taxaPorAla() {
+	public @ResponseBody ResponseEntity<Response<TaxaOcupacaoAla>> taxaPorAla(@RequestParam Long idAla) {
 		Response<TaxaOcupacaoAla> response = new Response<TaxaOcupacaoAla>();
-		List<Leito> leitos = leitoRepository.findAll();
+		List<Leito> leitos = leitoRepository.findAllByAla(idAla);
 		Set<Enfermaria> enfermarias = new HashSet<>();
 		leitos.forEach(leito -> enfermarias.add(leito.getEnfermaria()));
 		TaxaOcupacaoAla ocupacaoAla = new TaxaOcupacaoAla(RotuloTaxaOcupacao.ALA);
@@ -117,7 +118,7 @@ public class TaxaOcupacaoController {
 								&& leito.getStatusLeito().name().startsWith("OCUPADO"))
 						.count())
 				.setQuantidadeLeitosIndisponiveis(leitos.stream().filter(
-						leito -> leito.getEnfermaria() == enf && (leito.getStatusLeito().name().startsWith("OCUPADO"))
+						leito -> leito.getEnfermaria() == enf && (leito.getStatusLeito().name().startsWith("BLOQUEADO"))
 								|| leito.getStatusLeito() == TipoStatusLeito.AGUARDANDO_LIMPEZA)
 						.count());
 
