@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.kanleitos.models.Enfermaria;
 import br.com.kanleitos.models.Leito;
+import br.com.kanleitos.models.Taxa;
 import br.com.kanleitos.models.enums.TipoStatusLeito;
 
 @Repository
@@ -20,10 +21,13 @@ public interface LeitoRepository extends JpaRepository<Leito, Long> {
 
 	@Query("SELECT l FROM Leito l WHERE l.statusLeito != 'INATIVO'")
 	List<Leito> findAllByStatusLeitoNotInativo();
-	
+
 	@Query("SELECT l FROM Leito l WHERE l.enfermaria.ala.idAla = :idAla")
 	List<Leito> findAllByAla(@Param("idAla") Long idAla);
-	
+
+	@Query("SELECT NEW br.com.kanleitos.models.Taxa(l.enfermaria.ala.nomeAla, l.statusLeito, count(l.statusLeito)) FROM Leito l WHERE l.enfermaria.ala.idAla = :idAla group by l.statusLeito")
+	List<Taxa> countAllStatusLeitoByAla(@Param("idAla") Long idAla);
+
 	@Transactional
 	@Modifying
 	@Query("UPDATE Leito l SET l.statusLeito = :status WHERE l.enfermaria = :enfermaria")

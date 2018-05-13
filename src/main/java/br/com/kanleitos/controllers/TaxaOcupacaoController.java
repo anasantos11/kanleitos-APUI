@@ -18,15 +18,13 @@ import br.com.kanleitos.models.Leito;
 import br.com.kanleitos.models.RegistroInternacao;
 import br.com.kanleitos.models.Taxa;
 import br.com.kanleitos.models.TaxaEnfermaria;
-import br.com.kanleitos.models.TaxaOcupacao;
-import br.com.kanleitos.models.TaxaOcupacaoAla;
 import br.com.kanleitos.models.enums.FaixaEtaria;
 import br.com.kanleitos.models.enums.RotuloTaxaOcupacao;
 import br.com.kanleitos.models.enums.StatusRegistro;
 import br.com.kanleitos.models.enums.TipoStatusLeito;
 import br.com.kanleitos.repository.LeitoRepository;
 import br.com.kanleitos.repository.RegistroInternacaoRepository;
-import br.com.kanleitos.util.Response;
+import br.com.kanleitos.util.ResponseTaxa;
 
 @Controller
 public class TaxaOcupacaoController {
@@ -38,10 +36,9 @@ public class TaxaOcupacaoController {
 	private LeitoRepository leitoRepository;
 
 	@GetMapping("taxaOcupacao/genero")
-	public @ResponseBody ResponseEntity<Response<TaxaOcupacao>> taxaPorGenero() {
+	public @ResponseBody ResponseEntity<ResponseTaxa<Taxa>> taxaPorGenero() {
 
-		Response<TaxaOcupacao> response = new Response<TaxaOcupacao>();
-		TaxaOcupacao taxaOcupacaoPorGernero = new TaxaOcupacao(RotuloTaxaOcupacao.GENERO);
+		ResponseTaxa<Taxa> taxaOcupacaoPorGenero = new ResponseTaxa<Taxa>(RotuloTaxaOcupacao.GENERO);
 		List<RegistroInternacao> registrosEmAndamento = registroInternacaoRepository
 				.findAllByStatusRegistro(StatusRegistro.EM_ANDAMENTO);
 
@@ -50,25 +47,22 @@ public class TaxaOcupacaoController {
 				.count();
 		long homens = registrosEmAndamento.size() - mulheres;
 
-		taxaOcupacaoPorGernero.addTaxa(new Taxa().setGrupo("Feminino").setQuantidade(mulheres))
+		taxaOcupacaoPorGenero.addTaxa(new Taxa().setGrupo("Feminino").setQuantidade(mulheres))
 				.addTaxa(new Taxa().setGrupo("Masculino").setQuantidade(homens));
 
-		response.setData(taxaOcupacaoPorGernero);
-		return ResponseEntity.ok(response);
+		return ResponseEntity.ok(taxaOcupacaoPorGenero);
 	}
 
 	@GetMapping("taxaOcupacao/idade")
-	public @ResponseBody ResponseEntity<Response<TaxaOcupacao>> taxaPorIdade() {
-
-		Response<TaxaOcupacao> response = new Response<TaxaOcupacao>();
-		TaxaOcupacao taxaOcupacaoPorIdade = new TaxaOcupacao(RotuloTaxaOcupacao.IDADE);
+	public @ResponseBody ResponseEntity<ResponseTaxa<Taxa>> taxaPorIdade() {
+		
+		ResponseTaxa<Taxa> taxaOcupacaoPorIdade = new ResponseTaxa<Taxa>(RotuloTaxaOcupacao.IDADE);
 		List<RegistroInternacao> registrosEmAndamento = registroInternacaoRepository
 				.findAllByStatusRegistro(StatusRegistro.EM_ANDAMENTO);
 		List<Taxa> taxas = filtraTaxasPorIdade(registrosEmAndamento);
 		taxaOcupacaoPorIdade.addAllTaxas(taxas);
 
-		response.setData(taxaOcupacaoPorIdade);
-		return ResponseEntity.ok(response);
+		return ResponseEntity.ok(taxaOcupacaoPorIdade);
 	}
 
 	private List<Taxa> filtraTaxasPorIdade(List<RegistroInternacao> stream) {
@@ -91,12 +85,13 @@ public class TaxaOcupacaoController {
 	}
 
 	@GetMapping("taxaOcupacao/alas")
-	public @ResponseBody ResponseEntity<Response<TaxaOcupacaoAla>> taxaPorAla(@RequestParam Long idAla) {
-		Response<TaxaOcupacaoAla> response = new Response<TaxaOcupacaoAla>();
+	public @ResponseBody ResponseEntity<ResponseTaxa<TaxaEnfermaria>> taxaPorAla(
+			@RequestParam Long idAla) {
+
 		List<Leito> leitos = leitoRepository.findAllByAla(idAla);
 		Set<Enfermaria> enfermarias = new HashSet<>();
 		leitos.forEach(leito -> enfermarias.add(leito.getEnfermaria()));
-		TaxaOcupacaoAla ocupacaoAla = new TaxaOcupacaoAla(RotuloTaxaOcupacao.ALA);
+		ResponseTaxa<TaxaEnfermaria> ocupacaoAla = new ResponseTaxa<TaxaEnfermaria>(RotuloTaxaOcupacao.ALA);
 
 		enfermarias.forEach(enf -> {
 			TaxaEnfermaria taxa = new TaxaEnfermaria().setNomeAla(enf.getAla().getNomeAla())
@@ -105,8 +100,7 @@ public class TaxaOcupacaoController {
 			ocupacaoAla.addTaxa(taxa);
 		});
 
-		response.setData(ocupacaoAla);
-		return ResponseEntity.ok(response);
+		return ResponseEntity.ok(ocupacaoAla);
 	}
 
 	private void setDadosLeitos(Enfermaria enf, List<Leito> leitos, TaxaEnfermaria taxa) {
@@ -121,6 +115,14 @@ public class TaxaOcupacaoController {
 						leito -> leito.getEnfermaria() == enf && (leito.getStatusLeito().name().startsWith("BLOQUEADO"))
 								|| leito.getStatusLeito() == TipoStatusLeito.AGUARDANDO_LIMPEZA)
 						.count());
+
+	}
+
+	@GetMapping("taxaOcupacao/statusLeitos")
+	public @ResponseBody ResponseEntity<ResponseTaxa<Taxa>> taxaStatusLeito(@RequestParam Long idAla) {
+		ResponseTaxa<Taxa> taxaStatusLeito = new ResponseTaxa<Taxa>(RotuloTaxaOcupacao.STATUS_LEITO);
+		taxaStatusLeito.addAllTaxas(leitoRepository.countAllStatusLeitoByAla(idAla));
+		return ResponseEntity.ok(taxaStatusLeito);
 
 	}
 
