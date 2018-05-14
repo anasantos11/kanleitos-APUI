@@ -24,6 +24,7 @@ import br.com.kanleitos.models.enums.RotuloTaxaOcupacao;
 import br.com.kanleitos.models.enums.StatusRegistro;
 import br.com.kanleitos.models.enums.TipoStatusLeito;
 import br.com.kanleitos.repository.LeitoRepository;
+import br.com.kanleitos.repository.PendenciaInternacaoRepository;
 import br.com.kanleitos.repository.RegistroInternacaoRepository;
 import br.com.kanleitos.util.ResponseTaxa;
 
@@ -38,8 +39,10 @@ public class TaxaOcupacaoController {
 
 	@Autowired
 	private TaxaOcupacaoDao taxaOcupacaoDao;
+	private PendenciaInternacaoRepository pendenciaInternacaoRepository;
 
 	@GetMapping("taxaOcupacao/genero")
+
 	public @ResponseBody ResponseEntity<ResponseTaxa<Taxa<Long>>> taxaPorGenero() {
 
 		ResponseTaxa<Taxa<Long>> taxaOcupacaoPorGenero = new ResponseTaxa<Taxa<Long>>(RotuloTaxaOcupacao.GENERO);
@@ -61,6 +64,7 @@ public class TaxaOcupacaoController {
 	public @ResponseBody ResponseEntity<ResponseTaxa<Taxa<Long>>> taxaPorIdade() {
 
 		ResponseTaxa<Taxa<Long>> taxaOcupacaoPorIdade = new ResponseTaxa<Taxa<Long>>(RotuloTaxaOcupacao.IDADE);
+
 		List<RegistroInternacao> registrosEmAndamento = registroInternacaoRepository
 				.findAllByStatusRegistro(StatusRegistro.EM_ANDAMENTO);
 		List<Taxa<Long>> taxas = filtraTaxasPorIdade(registrosEmAndamento);
@@ -88,7 +92,6 @@ public class TaxaOcupacaoController {
 		return taxas;
 	}
 
-	@GetMapping("taxaOcupacao/alas")
 	public @ResponseBody ResponseEntity<ResponseTaxa<TaxaEnfermaria>> taxaPorAla(@RequestParam Long idAla) {
 
 		List<Leito> leitos = leitoRepository.findAllByAla(idAla);
@@ -115,8 +118,8 @@ public class TaxaOcupacaoController {
 								&& leito.getStatusLeito().name().startsWith("OCUPADO"))
 						.count())
 				.setQuantidadeLeitosIndisponiveis(leitos.stream().filter(
-						leito -> leito.getEnfermaria() == enf && (leito.getStatusLeito().name().startsWith("BLOQUEADO"))
-								|| leito.getStatusLeito() == TipoStatusLeito.AGUARDANDO_LIMPEZA)
+						leito -> leito.getEnfermaria() == enf && (leito.getStatusLeito().name().startsWith("BLOQUEADO")
+								|| leito.getStatusLeito() == TipoStatusLeito.AGUARDANDO_LIMPEZA))
 						.count());
 
 	}
@@ -126,7 +129,15 @@ public class TaxaOcupacaoController {
 		ResponseTaxa<Taxa<Long>> taxaStatusLeito = new ResponseTaxa<Taxa<Long>>(RotuloTaxaOcupacao.STATUS_LEITO);
 		taxaStatusLeito.addAllTaxas(leitoRepository.countAllStatusLeitoByAla(idAla));
 		return ResponseEntity.ok(taxaStatusLeito);
+	}
 
+	@GetMapping("taxaOcupacao/tipoPendenciaInternacao")
+	public @ResponseBody ResponseEntity<ResponseTaxa<Taxa<Long>>> taxaPorTipoPendenciaInternacaoEmAndamento(
+			@RequestParam Long idAla) {
+		ResponseTaxa<Taxa<Long>> taxaStatusLeito = new ResponseTaxa<Taxa<Long>>(
+				RotuloTaxaOcupacao.TIPO_PENDENCIA_INTERNACAO);
+		taxaStatusLeito.addAllTaxas(pendenciaInternacaoRepository.countAllPendenciasInternacaoAndamento(idAla));
+		return ResponseEntity.ok(taxaStatusLeito);
 	}
 
 	@GetMapping("/taxaOcupacao/tempoMedioAno")
