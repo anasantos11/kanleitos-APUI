@@ -37,12 +37,12 @@ public class RegistroInternacao {
 	@ManyToOne
 	@JoinColumn(name = "idLeito", nullable = false)
 	private Leito leito;
-	
-	@NotNull
-	private String dataInternacao;
 
 	@NotNull
-	private String previsaoAlta;
+	private Date dataInternacao;
+
+	@NotNull
+	private Date previsaoAlta;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataAlta;
@@ -77,19 +77,19 @@ public class RegistroInternacao {
 		this.leito = leito;
 	}
 
-	public String getDataInternacao() {
+	public Date getDataInternacao() {
 		return dataInternacao;
 	}
 
-	public void setDataInternacao(String dataInternacao) {
+	public void setDataInternacao(Date dataInternacao) {
 		this.dataInternacao = dataInternacao;
 	}
 
-	public String getPrevisaoAlta() {
+	public Date getPrevisaoAlta() {
 		return previsaoAlta;
 	}
 
-	public void setPrevisaoAlta(String previsaoAlta) {
+	public void setPrevisaoAlta(Date previsaoAlta) {
 		this.previsaoAlta = previsaoAlta;
 	}
 
@@ -121,13 +121,12 @@ public class RegistroInternacao {
 		this.hospital = hospital;
 	}
 
-
 	@Override
 	public String toString() {
 		return "RegistroInternacao [idRegistroInternacao=" + idRegistroInternacao + ", pedidoInternacao="
-				+ pedidoInternacao + ", hospital=" + hospital + ", leito=" + leito
-				+ ", dataInternacao=" + dataInternacao + ", previsaoAlta=" + previsaoAlta + ", dataAlta=" + dataAlta
-				+ ", statusRegistro=" + statusRegistro + "]";
+				+ pedidoInternacao + ", hospital=" + hospital + ", leito=" + leito + ", dataInternacao="
+				+ dataInternacao + ", previsaoAlta=" + previsaoAlta + ", dataAlta=" + dataAlta + ", statusRegistro="
+				+ statusRegistro + "]";
 	}
 
 }
