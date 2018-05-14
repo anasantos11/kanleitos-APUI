@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import br.com.kanleitos.dao.TaxaOcupacaoDao;
 import br.com.kanleitos.models.Enfermaria;
 import br.com.kanleitos.models.Leito;
 import br.com.kanleitos.models.RegistroInternacao;
@@ -37,12 +38,14 @@ public class TaxaOcupacaoController {
 	private LeitoRepository leitoRepository;
 
 	@Autowired
+	private TaxaOcupacaoDao taxaOcupacaoDao;
 	private PendenciaInternacaoRepository pendenciaInternacaoRepository;
 
 	@GetMapping("taxaOcupacao/genero")
-	public @ResponseBody ResponseEntity<ResponseTaxa<Taxa>> taxaPorGenero() {
 
-		ResponseTaxa<Taxa> taxaOcupacaoPorGenero = new ResponseTaxa<Taxa>(RotuloTaxaOcupacao.GENERO);
+	public @ResponseBody ResponseEntity<ResponseTaxa<Taxa<Long>>> taxaPorGenero() {
+
+		ResponseTaxa<Taxa<Long>> taxaOcupacaoPorGenero = new ResponseTaxa<Taxa<Long>>(RotuloTaxaOcupacao.GENERO);
 		List<RegistroInternacao> registrosEmAndamento = registroInternacaoRepository
 				.findAllByStatusRegistro(StatusRegistro.EM_ANDAMENTO);
 
@@ -51,26 +54,27 @@ public class TaxaOcupacaoController {
 				.count();
 		long homens = registrosEmAndamento.size() - mulheres;
 
-		taxaOcupacaoPorGenero.addTaxa(new Taxa().setGrupo("Feminino").setQuantidade(mulheres))
-				.addTaxa(new Taxa().setGrupo("Masculino").setQuantidade(homens));
+		taxaOcupacaoPorGenero.addTaxa(new Taxa<Long>().setGrupo("Feminino").setQuantidade(mulheres))
+				.addTaxa(new Taxa<Long>().setGrupo("Masculino").setQuantidade(homens));
 
 		return ResponseEntity.ok(taxaOcupacaoPorGenero);
 	}
 
 	@GetMapping("taxaOcupacao/idade")
-	public @ResponseBody ResponseEntity<ResponseTaxa<Taxa>> taxaPorIdade() {
+	public @ResponseBody ResponseEntity<ResponseTaxa<Taxa<Long>>> taxaPorIdade() {
 
-		ResponseTaxa<Taxa> taxaOcupacaoPorIdade = new ResponseTaxa<Taxa>(RotuloTaxaOcupacao.IDADE);
+		ResponseTaxa<Taxa<Long>> taxaOcupacaoPorIdade = new ResponseTaxa<Taxa<Long>>(RotuloTaxaOcupacao.IDADE);
+
 		List<RegistroInternacao> registrosEmAndamento = registroInternacaoRepository
 				.findAllByStatusRegistro(StatusRegistro.EM_ANDAMENTO);
-		List<Taxa> taxas = filtraTaxasPorIdade(registrosEmAndamento);
+		List<Taxa<Long>> taxas = filtraTaxasPorIdade(registrosEmAndamento);
 		taxaOcupacaoPorIdade.addAllTaxas(taxas);
 
 		return ResponseEntity.ok(taxaOcupacaoPorIdade);
 	}
 
-	private List<Taxa> filtraTaxasPorIdade(List<RegistroInternacao> stream) {
-		List<Taxa> taxas = new ArrayList<Taxa>();
+	private List<Taxa<Long>> filtraTaxasPorIdade(List<RegistroInternacao> stream) {
+		List<Taxa<Long>> taxas = new ArrayList<Taxa<Long>>();
 		List<FaixaEtaria> faixasEtarias = Arrays.asList(FaixaEtaria.values());
 
 		for (int i = 0; i < faixasEtarias.size(); i++) {
@@ -88,9 +92,7 @@ public class TaxaOcupacaoController {
 		return taxas;
 	}
 
-	@GetMapping("taxaOcupacao/alas")
-	public @ResponseBody ResponseEntity<ResponseTaxa<TaxaEnfermaria>> taxaPorAla(
-		@RequestParam Long idAla) {
+	public @ResponseBody ResponseEntity<ResponseTaxa<TaxaEnfermaria>> taxaPorAla(@RequestParam Long idAla) {
 
 		List<Leito> leitos = leitoRepository.findAllByAla(idAla);
 		Set<Enfermaria> enfermarias = new HashSet<>();
@@ -123,18 +125,30 @@ public class TaxaOcupacaoController {
 	}
 
 	@GetMapping("taxaOcupacao/statusLeitos")
-	public @ResponseBody ResponseEntity<ResponseTaxa<Taxa>> taxaPorStatusLeito(@RequestParam Long idAla) {
-		ResponseTaxa<Taxa> taxaStatusLeito = new ResponseTaxa<Taxa>(RotuloTaxaOcupacao.STATUS_LEITO);
+	public @ResponseBody ResponseEntity<ResponseTaxa<Taxa<Long>>> taxaStatusLeito(@RequestParam Long idAla) {
+		ResponseTaxa<Taxa<Long>> taxaStatusLeito = new ResponseTaxa<Taxa<Long>>(RotuloTaxaOcupacao.STATUS_LEITO);
 		taxaStatusLeito.addAllTaxas(leitoRepository.countAllStatusLeitoByAla(idAla));
 		return ResponseEntity.ok(taxaStatusLeito);
 	}
 
 	@GetMapping("taxaOcupacao/tipoPendenciaInternacao")
-	public @ResponseBody ResponseEntity<ResponseTaxa<Taxa>> taxaPorTipoPendenciaInternacaoEmAndamento(
+	public @ResponseBody ResponseEntity<ResponseTaxa<Taxa<Long>>> taxaPorTipoPendenciaInternacaoEmAndamento(
 			@RequestParam Long idAla) {
-		ResponseTaxa<Taxa> taxaStatusLeito = new ResponseTaxa<Taxa>(RotuloTaxaOcupacao.TIPO_PENDENCIA_INTERNACAO);
+		ResponseTaxa<Taxa<Long>> taxaStatusLeito = new ResponseTaxa<Taxa<Long>>(
+				RotuloTaxaOcupacao.TIPO_PENDENCIA_INTERNACAO);
 		taxaStatusLeito.addAllTaxas(pendenciaInternacaoRepository.countAllPendenciasInternacaoAndamento(idAla));
 		return ResponseEntity.ok(taxaStatusLeito);
+	}
+
+	@GetMapping("/taxaOcupacao/tempoMedioAno")
+	public @ResponseBody ResponseEntity<ResponseTaxa<Taxa<Double>>> tempoMedioAno(@RequestParam Long idLeito,
+			@RequestParam int ano) {
+
+		ResponseTaxa<Taxa<Double>> taxaTempoMedio = new ResponseTaxa<Taxa<Double>>(RotuloTaxaOcupacao.TEMPO_MEDIO_ANO);
+		List<Taxa<Double>> taxas = taxaOcupacaoDao.getTaxaTempoMedioAno(ano, idLeito);
+		taxaTempoMedio.addAllTaxas(taxas);
+
+		return ResponseEntity.ok(taxaTempoMedio);
 	}
 
 }

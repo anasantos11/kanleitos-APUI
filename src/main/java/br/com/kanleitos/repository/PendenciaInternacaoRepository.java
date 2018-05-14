@@ -18,5 +18,5 @@ public interface PendenciaInternacaoRepository extends JpaRepository<PendenciaIn
 	@Query("SELECT NEW br.com.kanleitos.models.Taxa(p.tipoPendencia.nome, count(p.tipoPendencia.nome)) FROM PendenciaInternacao p "
 			+ "WHERE p.dataConclusao is null and p.registroInternacao.statusRegistro = 'EM_ANDAMENTO' and "
 			+ "p.registroInternacao.leito.enfermaria.ala.idAla = :idAla group by p.tipoPendencia.nome")
-	List<Taxa> countAllPendenciasInternacaoAndamento(@Param("idAla") Long idAla);
+	List<Taxa<Long>> countAllPendenciasInternacaoAndamento(@Param("idAla") Long idAla);
 }

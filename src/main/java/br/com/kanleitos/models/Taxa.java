@@ -2,21 +2,22 @@ package br.com.kanleitos.models;
 
 import br.com.kanleitos.models.enums.TipoStatusLeito;
 
-public class Taxa {
+public class Taxa<T> {
 	private String nomeAla;
 	private String grupo;
-	private long quantidade;
+	private T quantidade;
 
 	public Taxa() {
 		this.grupo = "";
-		this.quantidade = 0;
+		this.quantidade = null;
 	}
-	
-	public Taxa(String grupo, Long quantidade) {
+
+	public Taxa(String grupo, T quantidade) {
 		this.grupo = grupo;
 		this.quantidade = quantidade;
 	}
-	public Taxa(String nomeAla, TipoStatusLeito status, Long quantidade) {
+
+	public Taxa(String nomeAla, TipoStatusLeito status, T quantidade) {
 		this.nomeAla = nomeAla;
 		this.grupo = status.getNome();
 		this.quantidade = quantidade;
@@ -34,16 +35,16 @@ public class Taxa {
 		return grupo;
 	}
 
-	public Taxa setGrupo(String grupo) {
+	public Taxa<T> setGrupo(String grupo) {
 		this.grupo = grupo;
 		return this;
 	}
 
-	public long getQuantidade() {
+	public T getQuantidade() {
 		return quantidade;
 	}
 
-	public Taxa setQuantidade(long quantidade) {
+	public Taxa<T> setQuantidade(T quantidade) {
 		this.quantidade = quantidade;
 		return this;
 	}
