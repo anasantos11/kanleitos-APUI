@@ -20,7 +20,7 @@ public class TaxaOcupacaoDao {
 	public List<Taxa<Double>> getTaxaTempoMedioAno(int ano, Long idLeito) {
 		ArrayList<Taxa<Double>> taxas = new ArrayList<Taxa<Double>>();
 		String query = "SELECT MONTH(data_alta), AVG(data_alta - data_internacao) FROM registro_internacao WHERE "
-				+ "id_leito = ? AND YEAR(data_internacao) = ? GROUP BY MONTH(data_alta)";
+				+ "id_leito = ? AND YEAR(data_internacao) = ? AND status_registro = 'ALTA' GROUP BY MONTH(data_alta)";
 
 		jdbcTemplate.query(query, new Object[] { idLeito, ano }, resultSet -> {
 			int mesInt = resultSet.getInt(1);
