@@ -82,7 +82,7 @@ public class TaxaOcupacaoController {
 					.filter(ri -> ri.getPedidoInternacao().getPaciente().getIdade() > faixaEtariaBase
 							&& ri.getPedidoInternacao().getPaciente().getIdade() <= faixaEtariaTopo)
 					.count();
-			taxas.add(new Taxa().setGrupo(faixaEtaria.name()).setQuantidade(quantidade));
+			taxas.add(new Taxa().setGrupo(faixaEtaria.nome).setQuantidade(quantidade));
 		}
 
 		return taxas;
