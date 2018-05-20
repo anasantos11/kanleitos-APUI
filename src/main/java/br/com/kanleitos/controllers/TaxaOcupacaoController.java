@@ -39,6 +39,8 @@ public class TaxaOcupacaoController {
 
 	@Autowired
 	private TaxaOcupacaoDao taxaOcupacaoDao;
+	
+	@Autowired
 	private PendenciaInternacaoRepository pendenciaInternacaoRepository;
 
 	@GetMapping("taxaOcupacao/genero")
@@ -92,6 +94,7 @@ public class TaxaOcupacaoController {
 		return taxas;
 	}
 
+	@GetMapping("taxaOcupacao/alas")
 	public @ResponseBody ResponseEntity<ResponseTaxa<TaxaEnfermaria>> taxaPorAla(@RequestParam Long idAla) {
 
 		List<Leito> leitos = leitoRepository.findAllByAla(idAla);
