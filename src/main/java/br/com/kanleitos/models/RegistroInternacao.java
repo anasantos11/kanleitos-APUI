@@ -16,6 +16,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
+import com.querydsl.core.annotations.QueryInit;
+
 import br.com.kanleitos.models.enums.StatusRegistro;
 
 @Entity
@@ -36,6 +38,7 @@ public class RegistroInternacao {
 
 	@ManyToOne
 	@JoinColumn(name = "idLeito", nullable = false)
+	@QueryInit("*.*")
 	private Leito leito;
 
 	@NotNull
