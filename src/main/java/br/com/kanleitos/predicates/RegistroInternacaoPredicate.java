@@ -25,7 +25,7 @@ public class RegistroInternacaoPredicate {
 		}
 
 		if (filtros.getIdAla() > 0) {
-			listPredicates.add(registro.pedidoInternacao.ala.idAla.eq(filtros.getIdAla()));
+			listPredicates.add(registro.leito.enfermaria.ala.idAla.eq(filtros.getIdAla()));
 		}
 		
 		if (filtros.getIdEnfermaria() > 0) {
