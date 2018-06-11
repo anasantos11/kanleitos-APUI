@@ -11,9 +11,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import br.com.kanleitos.models.Enfermaria;
 import br.com.kanleitos.models.Leito;
-import br.com.kanleitos.models.enums.TipoStatusLeito;
-import br.com.kanleitos.repository.LeitoRepository;
 import br.com.kanleitos.repository.EnfermariaRepository;
+import br.com.kanleitos.repository.LeitoRepository;
 import br.com.kanleitos.util.Response;
 
 @Controller
@@ -35,14 +34,16 @@ public class LeitoController {
 	}
 
 	@GetMapping("leitosEnfermarias")
-	public @ResponseBody ResponseEntity<Response<List<Leito>>> getLeitosByEnfermaria(@RequestParam Long idEnfermaria) {
+	public @ResponseBody ResponseEntity<Response<List<Leito>>> getLeitosByEnfermaria(@RequestParam Long idEnfermaria,
+			@RequestParam boolean apenasDesocupados) {
 		List<Leito> leitos = null;
 		Enfermaria enfermaria = null;
 		if (idEnfermaria != null) {
 			enfermaria = repositoryEnfermaria.findOne(idEnfermaria);
 
 			if (enfermaria != null) {
-				leitos = repository.findByEnfermariaAndStatusLeito(enfermaria, TipoStatusLeito.DESOCUPADO);
+				leitos = apenasDesocupados ? repository.findAllByEnfermariaAndDesocupados(idEnfermaria)
+						: repository.findAllByEnfermaria(idEnfermaria);
 			}
 		}
 

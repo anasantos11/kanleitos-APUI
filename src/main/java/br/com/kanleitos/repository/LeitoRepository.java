@@ -19,6 +19,12 @@ public interface LeitoRepository extends JpaRepository<Leito, Long> {
 
 	List<Leito> findByEnfermariaAndStatusLeito(Enfermaria enfermaria, TipoStatusLeito desocupado);
 
+	@Query("SELECT l FROM Leito l WHERE l.enfermaria.idEnfermaria = :idEnfermaria")
+	List<Leito> findAllByEnfermaria(@Param("idEnfermaria") Long idEnfermaria);
+	 
+	@Query("SELECT l FROM Leito l WHERE l.enfermaria.idEnfermaria = :idEnfermaria AND l.statusLeito = 'DESOCUPADO'")
+	List<Leito> findAllByEnfermariaAndDesocupados(@Param("idEnfermaria") Long idEnfermaria);
+	
 	@Query("SELECT l FROM Leito l WHERE l.statusLeito != 'INATIVO'")
 	List<Leito> findAllByStatusLeitoNotInativo();
 
