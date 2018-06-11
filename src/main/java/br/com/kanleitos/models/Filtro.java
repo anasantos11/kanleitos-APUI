@@ -13,8 +13,6 @@ public class Filtro {
 	private long numProntuario;
 	private Date dataAdmissao;
 	private Date previsaoAlta;
-	private String medicoResponsavel;
-	private String residenteResponsavel;
 	private String status;
 	
 	public long getIdEnfermaria() {
@@ -95,22 +93,6 @@ public class Filtro {
 
 	public void setDataAdmissao(Date dataAdmissao) {
 		this.dataAdmissao = dataAdmissao;
-	}
-
-	public String getMedicoResponsavel() {
-		return medicoResponsavel;
-	}
-
-	public void setMedicoResponsavel(String medicoResponsavel) {
-		this.medicoResponsavel = medicoResponsavel;
-	}
-
-	public String getResidenteResponsavel() {
-		return residenteResponsavel;
-	}
-
-	public void setResidenteResponsavel(String residenteResponsavel) {
-		this.residenteResponsavel = residenteResponsavel;
 	}
 
 	public String getStatus() {

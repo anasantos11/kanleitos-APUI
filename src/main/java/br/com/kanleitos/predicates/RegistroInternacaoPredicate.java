@@ -19,31 +19,30 @@ public class RegistroInternacaoPredicate {
 		List<Predicate> listPredicates = new ArrayList<>();
 
 		QRegistroInternacao registro = QRegistroInternacao.registroInternacao;
-		
-		if(filtros.getStatus() != null && !filtros.getStatus().isEmpty()) {
-			listPredicates.add(registro.statusRegistro.eq(StatusRegistro.fromName(filtros.getStatus())));		
+
+		if (filtros.getStatus() != null && !filtros.getStatus().isEmpty()) {
+			listPredicates.add(registro.statusRegistro.eq(StatusRegistro.fromName(filtros.getStatus())));
 		}
 
 		if (filtros.getIdAla() > 0) {
 			listPredicates.add(registro.leito.enfermaria.ala.idAla.eq(filtros.getIdAla()));
 		}
-		
+
 		if (filtros.getIdEnfermaria() > 0) {
 			listPredicates.add(registro.leito.enfermaria.idEnfermaria.eq(filtros.getIdEnfermaria()));
 		}
-		
-		if (filtros.getIdEnfermaria() > 0) {
-			listPredicates.add(registro.leito.idLeito.eq(filtros.getIdEnfermaria()));
+
+		if (filtros.getIdLeito() > 0) {
+			listPredicates.add(registro.leito.idLeito.eq(filtros.getIdLeito()));
 		}
 
-		if (!filtros.getMedicoResponsavel().isEmpty() && filtros.getMedicoResponsavel() != null) {
-			listPredicates.add(registro.pedidoInternacao.medicoResponsavel
-					.like(Expressions.asString("%").concat(filtros.getMedicoResponsavel()).concat("%")));
+		if (filtros.getIdMedico() > 0) {
+			listPredicates.add(registro.pedidoInternacao.medicoResponsavel.idFuncionario.eq(filtros.getIdMedico()));
 		}
 
-		if (!filtros.getResidenteResponsavel().isEmpty() && filtros.getResidenteResponsavel() != null) {
-			listPredicates.add(registro.pedidoInternacao.residenteResponsavel
-					.like(Expressions.asString("%").concat(filtros.getResidenteResponsavel()).concat("%")));
+		if (filtros.getIdResidente() > 0) {
+			listPredicates
+					.add(registro.pedidoInternacao.residenteResponsavel.idFuncionario.eq(filtros.getIdResidente()));
 		}
 
 		if (filtros.getIdIsolamento() > 0) {
@@ -64,7 +63,7 @@ public class RegistroInternacaoPredicate {
 			startDate.setHours(0);
 			startDate.setMinutes(0);
 			startDate.setSeconds(0);
-			
+
 			Date endDate = new Date(filtros.getDataAdmissao().getTime());
 			endDate.setHours(23);
 			endDate.setMinutes(59);

@@ -28,14 +28,12 @@ public class PedidoInternacaoPredicate {
 			listPredicates.add(pedido.ala.idAla.eq(filtros.getIdAla()));
 		}
 
-		if (!filtros.getMedicoResponsavel().isEmpty() && filtros.getMedicoResponsavel() != null) {
-			listPredicates.add(pedido.medicoResponsavel
-					.like(Expressions.asString("%").concat(filtros.getMedicoResponsavel()).concat("%")));
+		if (filtros.getIdMedico() > 0) {
+			listPredicates.add(pedido.medicoResponsavel.idFuncionario.eq(filtros.getIdMedico()));
 		}
-
-		if (!filtros.getResidenteResponsavel().isEmpty() && filtros.getResidenteResponsavel() != null) {
-			listPredicates.add(pedido.residenteResponsavel
-					.like(Expressions.asString("%").concat(filtros.getResidenteResponsavel()).concat("%")));
+		
+		if (filtros.getIdResidente() > 0) {
+			listPredicates.add(pedido.residenteResponsavel.idFuncionario.eq(filtros.getIdResidente()));
 		}
 
 		if (filtros.getIdIsolamento() > 0) {

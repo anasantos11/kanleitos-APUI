@@ -37,9 +37,13 @@ public class PedidoInternacao {
 	@JoinColumn(name = "idDiagnostico", nullable = false)
 	private Diagnostico diagnostico;
 
-	private String medicoResponsavel;
+	@ManyToOne
+	@JoinColumn(name = "idMedicoResponsavel", nullable = false)
+	private Funcionario medicoResponsavel;
 
-	private String residenteResponsavel;
+	@ManyToOne
+	@JoinColumn(name = "idResidenteResponsavel", nullable = false)
+	private Funcionario residenteResponsavel;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@NotNull
@@ -79,20 +83,20 @@ public class PedidoInternacao {
 	public void setDiagnostico(Diagnostico diagnostico) {
 		this.diagnostico = diagnostico;
 	}
-
-	public String getMedicoResponsavel() {
+	
+	public Funcionario getMedicoResponsavel() {
 		return medicoResponsavel;
 	}
 
-	public void setMedicoResponsavel(String medicoResponsavel) {
+	public void setMedicoResponsavel(Funcionario medicoResponsavel) {
 		this.medicoResponsavel = medicoResponsavel;
 	}
 
-	public String getResidenteResponsavel() {
+	public Funcionario getResidenteResponsavel() {
 		return residenteResponsavel;
 	}
 
-	public void setResidenteResponsavel(String residenteResponsavel) {
+	public void setResidenteResponsavel(Funcionario residenteResponsavel) {
 		this.residenteResponsavel = residenteResponsavel;
 	}
 

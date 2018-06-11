@@ -30,6 +30,7 @@ public class RegistroInternacao {
 
 	@OneToOne
 	@JoinColumn(name = "idPedidoInternacao", nullable = false)
+	@QueryInit("*.*")
 	private PedidoInternacao pedidoInternacao;
 
 	@ManyToOne
