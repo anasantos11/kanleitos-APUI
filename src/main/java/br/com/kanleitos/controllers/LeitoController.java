@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -52,4 +54,18 @@ public class LeitoController {
 		return ResponseEntity.ok(response);
 	}
 
+	@PutMapping("/leito")
+	public @ResponseBody ResponseEntity<Response<Long>> updateLeito(@RequestBody Leito leito) {
+		Response<Long> response = new Response<Long>();
+		Leito leitoAtual = repository.getOne(leito.getIdLeito());
+		if(leitoAtual.getStatusLeito().name().startsWith("OCUPADO")) {
+			response.setData(null);
+			response.addError("O status não pode ser alterado o leito está ocupado.");
+			return ResponseEntity.badRequest().body(response);
+		}
+			
+		repository.save(leito);		
+		response.setData(leito.getIdLeito());
+		return ResponseEntity.ok(response);
+	}
 }
