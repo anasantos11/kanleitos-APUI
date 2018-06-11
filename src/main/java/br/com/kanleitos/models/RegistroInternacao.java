@@ -42,9 +42,6 @@ public class RegistroInternacao {
 	private Leito leito;
 
 	@NotNull
-	private Date dataInternacao;
-
-	@NotNull
 	private Date previsaoAlta;
 
 	@Temporal(TemporalType.TIMESTAMP)
@@ -57,7 +54,6 @@ public class RegistroInternacao {
 	public RegistroInternacao() {
 		setPedidoInternacao(new PedidoInternacao());
 		setLeito(new Leito());
-		setDataInternacao(null);
 		setPrevisaoAlta(null);
 		setDataAlta(null);
 		setStatusRegistro(StatusRegistro.EM_ANDAMENTO);
@@ -78,14 +74,6 @@ public class RegistroInternacao {
 
 	public void setLeito(Leito leito) {
 		this.leito = leito;
-	}
-
-	public Date getDataInternacao() {
-		return dataInternacao;
-	}
-
-	public void setDataInternacao(Date dataInternacao) {
-		this.dataInternacao = dataInternacao;
 	}
 
 	public Date getPrevisaoAlta() {
@@ -122,14 +110,6 @@ public class RegistroInternacao {
 
 	public void setHospital(Hospital hospital) {
 		this.hospital = hospital;
-	}
-
-	@Override
-	public String toString() {
-		return "RegistroInternacao [idRegistroInternacao=" + idRegistroInternacao + ", pedidoInternacao="
-				+ pedidoInternacao + ", hospital=" + hospital + ", leito=" + leito + ", dataInternacao="
-				+ dataInternacao + ", previsaoAlta=" + previsaoAlta + ", dataAlta=" + dataAlta + ", statusRegistro="
-				+ statusRegistro + "]";
 	}
 
 }
