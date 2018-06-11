@@ -3,18 +3,12 @@ package br.com.kanleitos.controllers;
 import java.util.List;
 import java.util.Set;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -46,7 +40,7 @@ public class IsolamentoController {
 		return ResponseEntity.ok(response);
 	}
 
-	@PostMapping("/isolamento")
+	/*@PostMapping("/isolamento")
 	public @ResponseBody ResponseEntity<Response<Long>> cadastrarIsolamento(@RequestBody @Valid Isolamento isolamento,
 			BindingResult result) {
 
@@ -126,7 +120,7 @@ public class IsolamentoController {
 			response.setData(idIsolamento);
 			return ResponseEntity.ok(response);
 		}
-	}
+	}*/
 
 	@GetMapping("/isolamentosPedidosConcluidos")
 	public @ResponseBody ResponseEntity<Response<Set<String>>> pedidosConcluidos(@RequestParam Long idEnfermaria) {
