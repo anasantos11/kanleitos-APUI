@@ -34,38 +34,54 @@ public class FuncionarioController {
 	}
 
 	@PostMapping("/funcionario")
-	public @ResponseBody ResponseEntity<Response<Integer>> cadastrarFuncionario(@Valid @RequestBody Funcionario funcionario,
-			BindingResult result) {
-		Response<Integer> response = new Response<Integer>();
+	public @ResponseBody ResponseEntity<Response<Long>> cadastrarFuncionario(
+			@Valid @RequestBody Funcionario funcionario, BindingResult result) {
+		Response<Long> response = new Response<Long>();
 
 		return persistFuncionario(funcionario, result, response);
 	}
 
 	@GetMapping("/funcionario")
 	public @ResponseBody ResponseEntity<Response<List<Funcionario>>> getFuncionariosByStatus(
-			@RequestParam(value="somenteAtivos", required=false)  boolean somenteAtivos) {
+			@RequestParam(value = "somenteAtivos", required = false) boolean somenteAtivos) {
 		Response<List<Funcionario>> response = new Response<List<Funcionario>>();
 
-		if(somenteAtivos) {
+		if (somenteAtivos) {
 			response.setData(repo.findAllByInativo(false));
-		}else {
+		} else {
 			response.setData(repo.findAll());
 		}
 
 		return ResponseEntity.ok(response);
 	}
 
+	@GetMapping("/medicos")
+	public @ResponseBody ResponseEntity<Response<List<Funcionario>>> getMedicos() {
+		Response<List<Funcionario>> response = new Response<List<Funcionario>>();
+
+		response.setData(repo.findAllByCrmNotNull());
+		return ResponseEntity.ok(response);
+	}
+	
+	@GetMapping("/funcionariosNaoMedicos")
+	public @ResponseBody ResponseEntity<Response<List<Funcionario>>> getFuncionariosNaoMedicos() {
+		Response<List<Funcionario>> response = new Response<List<Funcionario>>();
+
+		response.setData(repo.findAllByCrmNull());
+		return ResponseEntity.ok(response);
+	}
+
 	@PutMapping("/funcionario")
-	public @ResponseBody ResponseEntity<Response<Integer>> atualizarFuncionario( @RequestBody Funcionario funcionario,
+	public @ResponseBody ResponseEntity<Response<Long>> atualizarFuncionario(@RequestBody Funcionario funcionario,
 			BindingResult result) {
-		Response<Integer> response = new Response<Integer>();
+		Response<Long> response = new Response<Long>();
 
 		return persistFuncionario(funcionario, result, response);
 	}
 
 	@PutMapping("/funcionario/alterarStatus")
-	public @ResponseBody ResponseEntity<Response<Integer>> alteraStatus(@RequestParam Integer idFuncionario) {
-		Response<Integer> response = new Response<Integer>();
+	public @ResponseBody ResponseEntity<Response<Long>> alteraStatus(@RequestParam Long idFuncionario) {
+		Response<Long> response = new Response<Long>();
 		Funcionario funcionario = repo.findOne(idFuncionario);
 
 		if (funcionario == null) {
@@ -79,8 +95,8 @@ public class FuncionarioController {
 		}
 	}
 
-	private ResponseEntity<Response<Integer>> persistFuncionario(Funcionario funcionario, BindingResult result,
-			Response<Integer> response) {
+	private ResponseEntity<Response<Long>> persistFuncionario(Funcionario funcionario, BindingResult result,
+			Response<Long> response) {
 		if (result.hasErrors()) {
 			response.setData(null);
 			result.getAllErrors().forEach(error -> response.addError(error.getCode()));

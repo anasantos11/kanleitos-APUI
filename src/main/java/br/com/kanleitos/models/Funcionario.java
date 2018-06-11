@@ -13,7 +13,7 @@ public class Funcionario {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int idFuncionario;
+	private long idFuncionario;
 	
 	@NotNull
 	private String nome;
@@ -24,11 +24,11 @@ public class Funcionario {
 	private String crm;
 	private boolean inativo;
 
-	public int getIdFuncionario() {
+	public long getIdFuncionario() {
 		return idFuncionario;
 	}
 
-	public void setIdFuncionario(int idFuncionario) {
+	public void setIdFuncionario(long idFuncionario) {
 		this.idFuncionario = idFuncionario;
 	}
 

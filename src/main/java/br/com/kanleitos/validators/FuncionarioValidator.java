@@ -24,7 +24,7 @@ public class FuncionarioValidator implements Validator {
 		funcionario = (Funcionario) target;
 
 		String especialidade = funcionario.getEspecialidade();
-		int idFuncionario = funcionario.getIdFuncionario();
+		long idFuncionario = funcionario.getIdFuncionario();
 		if (especialidade == null || especialidade.isEmpty())
 			errors.rejectValue("especialidade", "A especialidade não pode ser vazio!");
 		if (idFuncionario > 0 && repository.exists(idFuncionario))

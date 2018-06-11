@@ -8,8 +8,10 @@ import org.springframework.stereotype.Repository;
 import br.com.kanleitos.models.Funcionario;
 
 @Repository
-public interface FuncionarioRepository extends JpaRepository<Funcionario, Integer> {
+public interface FuncionarioRepository extends JpaRepository<Funcionario, Long> {
 
 	List<Funcionario> findAllByInativo(boolean inativo);
+	List<Funcionario> findAllByCrmNotNull();
+	List<Funcionario> findAllByCrmNull();
 
 }
