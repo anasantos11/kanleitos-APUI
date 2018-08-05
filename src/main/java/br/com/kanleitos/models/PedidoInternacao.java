@@ -2,6 +2,7 @@ package br.com.kanleitos.models;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -33,9 +34,8 @@ public class PedidoInternacao {
 	@JoinColumn(name = "idAla", nullable = false)
 	private Ala ala;
 
-	@ManyToOne
-	@JoinColumn(name = "idDiagnostico", nullable = false)
-	private Diagnostico diagnostico;
+	@Column(length=500)
+	private String diagnostico;
 
 	@ManyToOne
 	@JoinColumn(name = "idMedicoResponsavel", nullable = false)
@@ -64,7 +64,7 @@ public class PedidoInternacao {
 		setAih(null);
 		setAla(new Ala());
 		setDataAdmissao(null);
-		setDiagnostico(new Diagnostico());
+		setDiagnostico(null);
 		setMedicoResponsavel(null);
 		setPaciente(new Paciente());
 		setResidenteResponsavel(null);
@@ -80,7 +80,7 @@ public class PedidoInternacao {
 		this.ala = ala;
 	}
 
-	public void setDiagnostico(Diagnostico diagnostico) {
+	public void setDiagnostico(String diagnostico) {
 		this.diagnostico = diagnostico;
 	}
 	
@@ -128,7 +128,7 @@ public class PedidoInternacao {
 		return ala;
 	}
 
-	public Diagnostico getDiagnostico() {
+	public String getDiagnostico() {
 		return diagnostico;
 	}
 
