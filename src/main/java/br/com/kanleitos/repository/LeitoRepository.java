@@ -31,7 +31,7 @@ public interface LeitoRepository extends JpaRepository<Leito, Long> {
 	@Query("SELECT l FROM Leito l WHERE l.enfermaria.ala.idAla = :idAla")
 	List<Leito> findAllByAla(@Param("idAla") Long idAla);
 
-	@Query("SELECT NEW br.com.kanleitos.models.Taxa(l.enfermaria.ala.nomeAla, l.statusLeito, count(l.statusLeito)) FROM Leito l WHERE l.enfermaria.ala.idAla = :idAla group by l.statusLeito")
+	@Query("SELECT NEW br.com.kanleitos.models.Taxa(l.statusLeito, count(l.statusLeito)) FROM Leito l WHERE l.enfermaria.ala.idAla = :idAla group by l.statusLeito")
 	List<Taxa<Long>> countAllStatusLeitoByAla(@Param("idAla") Long idAla);
 
 	@Transactional

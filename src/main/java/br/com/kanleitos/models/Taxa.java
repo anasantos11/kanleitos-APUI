@@ -17,8 +17,7 @@ public class Taxa<T> {
 		this.quantidade = quantidade;
 	}
 
-	public Taxa(String nomeAla, TipoStatusLeito status, T quantidade) {
-		this.nomeAla = nomeAla;
+	public Taxa(TipoStatusLeito status, T quantidade) {
 		this.grupo = status.getNome();
 		this.quantidade = quantidade;
 	}
