@@ -59,7 +59,11 @@ public class RegistroInternacaoController {
 			registroInternacao.setStatusRegistro(StatusRegistro.EM_ANDAMENTO);
 			registroRepository.save(registroInternacao);
 			// Alterar Status do Leito para Ocupado
-			registroInternacao.getLeito().setStatusLeito(TipoStatusLeito.OCUPADO_COMUM);
+			if(registroInternacao.getPedidoInternacao().getIsolamento() != null)
+				registroInternacao.getLeito().setStatusLeito(registroInternacao.getPedidoInternacao().getIsolamento().getStatusLeito());
+			else
+				registroInternacao.getLeito().setStatusLeito(TipoStatusLeito.OCUPADO_COMUM);
+			
 			leitoRepository.save(registroInternacao.getLeito());
 
 			// Atualizar Pedido para concluido
@@ -74,7 +78,7 @@ public class RegistroInternacaoController {
 		}
 
 	}
-
+	
 	@PostMapping("/pacientesInternados")
 	public @ResponseBody ResponseEntity<Response<List<RegistroInternacao>>> listarInternacoes(@RequestBody Filtro filtros) {
 		

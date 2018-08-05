@@ -543,9 +543,9 @@ insert into diagnostico (cid, descricao_diagnostico) values('a17','Tuberculose d
 insert into diagnostico (cid, descricao_diagnostico) values('a18','Tuberculose de outros órgãos');
 
 --Inserir Isolamentos
-insert into isolamento (nome, inativo) values ('Respiratório', 0);
-insert into isolamento (nome, inativo) values ('Precaução de contato', 0);
-insert into isolamento (nome, inativo) values ('Reverso/Protetor', 0);
+insert into isolamento (nome, inativo, status_leito) values ('Respiratório', 0, 'OCUPADO_ISOLAMENTO_RESPIRATORIO');
+insert into isolamento (nome, inativo, status_leito) values ('Precaução de contato', 0, 'OCUPADO_PRECAUCAO_CONTATO');
+insert into isolamento (nome, inativo, status_leito) values ('Reverso/Protetor', 0, 'OCUPADO_REVERSO_PROTETOR');
 
 --Inserir Hospitais
 insert into hospital(nome, endereco, telefone, especialidade, inativo) values ('Hospital João XXIII','Av. Alfredo Balena, 400 (Santa Efigênia)','3132399300', 'Politrauma, grandes queimados e intoxicações graves', 0 );
