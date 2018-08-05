@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import br.com.kanleitos.models.Ala;
 import br.com.kanleitos.repository.AlaRepository;
+import br.com.kanleitos.repository.EnfermariaRepository;
 import br.com.kanleitos.util.Response;
 
 @Controller
@@ -19,6 +20,8 @@ public class AlaController {
 
 	@Autowired
 	private AlaRepository repository;
+	@Autowired
+	private EnfermariaRepository repositoryEnf;
 
 	@GetMapping("alas")
 	public @ResponseBody ResponseEntity<Response<List<Ala>>> listarAlas(@RequestParam boolean ativo) {
@@ -41,6 +44,7 @@ public class AlaController {
 			ala.setInativa(!ala.isInativa());
 			repository.save(ala);
 			response.setData(idAla);
+			repositoryEnf.updateInativaByAla(ala.isInativa(), ala);
 			return ResponseEntity.ok(response);
 		}
 	}
