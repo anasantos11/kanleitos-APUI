@@ -2,7 +2,7 @@
 insert into ala (nome_ala,inativa) values('Cirurgia - Ala A', 0);
 insert into ala (nome_ala,inativa) values('Clínica médica - Ala C', 0);
 insert into ala (nome_ala,inativa) values('Tisiologia - Ala G', 0);
-insert into ala (nome_ala,inativa) values('Clínica médica - Ala H', 1);
+insert into ala (nome_ala,inativa) values('Clínica médica - Ala H', 0);
 insert into ala (nome_ala,inativa) values('Clínica pneu - Ala D', 0);
 insert into ala (nome_ala,inativa) values('CTI Adulto', 0);
 insert into ala (nome_ala,inativa) values('Semi Intensivo', 0);
